@@ -1,0 +1,21 @@
+
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    Hello,<br />
+    Your account has been successfully created in the <b>{{ workspaceName }}</b>
+    workspace. Please use the below temporary password for your first login.<br />
+
+    Email:<b>{{ email }}</b><br />
+    Password: <b>{{ password }}</b>
+
+    <!-- Action -->
+    {{>action.partial action=actionUrl text='Login' }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+
+</div>
+
+{{/layout.partial}}

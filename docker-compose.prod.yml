@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  cms:
+    image: registry.gitlab.com/posterlab/posterlab-mvp/cms:latest
+    restart: always
+    build:
+      context: ./cms
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_ENV: production
+        CMS_URL: ${CMS_URL}
+    environment:
+      DATABASE_USERNAME: ${CMS_DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${CMS_DATABASE_PASSWORD}
+      DATABASE_SSL: "true"
+
+  nest-backend:
+    image: registry.gitlab.com/posterlab/posterlab-mvp/nest-backend:latest
+    restart: always
+    build:
+      context: ./nest-backend
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_ENV: production
+    environment:
+      NODE_ENV: production
+
+  nlp:
+    image: registry.gitlab.com/posterlab/posterlab-mvp/nlp:latest
+    restart: always
+
+  web-app:
+    image: registry.gitlab.com/posterlab/posterlab-mvp/web-app:latest
+    restart: always
+    build:
+      context: ./web-app-material
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_ENV: production
+        AXIOS_BROWSER_BASE_URL: ${BACKEND_URL}
+        AXIOS_BASE_URL: http://nest-backend:2828
+        SENTRY_DNS: ${APP_SENTRY_DNS}
+        VUE_APP_JITSI_APP_ID: ${VUE_APP_JITSI_APP_ID}
+        WEB_APP_AZURE_URL_PART1: ${WEB_APP_AZURE_URL_PART1}
+        WEB_APP_AZURE_URL_PART2: ${WEB_APP_AZURE_URL_PART2}
+        CLIENT_URL: ${CLIENT_URL}
+        LOCAL_ACCOUNT_ISSUER: ${LOCAL_ACCOUNT_ISSUER}
+        AZURE_AUTHORIZE_ENDPOINT: ${AZURE_AUTHORIZE_ENDPOINT}
+        AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+        WEB_APP_AZURE_SIGN_UP_URL: ${WEB_APP_AZURE_SIGN_UP_URL}
+        PASSWORD_RESET_URL: ${PASSWORD_RESET_URL}
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - nest-backend
+      - cms

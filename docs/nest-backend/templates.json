@@ -1,0 +1,76 @@
+[
+  {
+    "name": "4-Step Kanban Board",
+    "description": "Generic Template for a simple process for activities in 4-Steps.",
+    "statuses": [
+      "to do",
+      "in progress",
+      "review",
+      "done"
+    ],
+    "cards": [
+      {
+        "title": "Name of the task 1",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 2",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 3",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 4",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 5",
+        "description": "",
+        "status": "to do"
+      }
+    ]
+  },
+  {
+    "name": "AQUI VA EL SEGUNDO TEMPLATE",
+    "description": "Generic Template for a simple process for activities in 4-Steps.",
+    "statuses": [
+      "to do",
+      "in progress",
+      "review",
+      "done"
+    ],
+    "cards": [
+      {
+        "title": "Name of the task 1",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 2",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 3",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 4",
+        "description": "",
+        "status": "to do"
+      },
+      {
+        "title": "Name of the task 5",
+        "description": "",
+        "status": "to do"
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_tenant_index_pages",
+  "info": {
+    "name": "indexPage",
+    "icon": "book",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "richtext",
+      "default": "Try our Suite to accelerate early research findings transfers within and across research organisations (academic, corporate)."
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    }
+  }
+}

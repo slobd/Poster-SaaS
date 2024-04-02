@@ -1,0 +1,52 @@
+
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    Hello {{ authorFirstName }},<br />
+    {{ commenterName }} has commented on your poster entitled <q>{{
+    posterTitle }}</q>.
+
+    <br />
+    <br />
+    Comment:
+    <table
+        class="attributes"
+        width="100%"
+        cellpadding="0"
+        cellspacing="0"
+        role="presentation"
+        style="margin: 0 0 21px"
+    >
+        <tr>
+            <td
+                class="attributes_content"
+                style="
+                    word-break: break-word;
+                    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+                    font-size: 16px;
+                    background-color: #f4f4f7;
+                    padding: 16px;
+                "
+                bgcolor="#F4F4F7"
+            >
+                <table
+                    width="100%"
+                    cellpadding="0"
+                    cellspacing="0"
+                    role="presentation"
+                >
+                    {{ content }}
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Action -->
+    {{>action.partial action=actionUrl text='View Comment' }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+</div>
+
+{{/layout.partial}}

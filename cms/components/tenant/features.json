@@ -1,0 +1,56 @@
+{
+  "collectionName": "components_tenant_features",
+  "info": {
+    "name": "features",
+    "icon": "atom",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "AccessControl": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "TenantManagement": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "Workspace": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "Project": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "Gallery": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "People": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "Comment": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "Invite": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "Board": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}

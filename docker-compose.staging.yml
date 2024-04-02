@@ -1,0 +1,64 @@
+version: '3'
+
+volumes:
+  postgres_db:
+
+services:
+  cms:
+    image: cms:dev
+    build:
+      context: ./cms
+      dockerfile: Dockerfile.prod
+      args:
+        NODE_ENV: production
+        CMS_URL: ${CMS_URL}
+    depends_on:
+      - postgres
+
+  nest-backend:
+    image: nest-backend:dev
+    build:
+      context: ./nest-backend
+      dockerfile: Dockerfile.prod
+      target: production
+      args:
+        NODE_ENV: production
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - postgres
+      - cms
+    command: sh -c './wait-for cms:7999 -- bash initial-script.sh'
+
+  web-app:
+    image: web-app:dev
+    build:
+      context: ./web-app-material
+      dockerfile: Dockerfile.prod
+      target: production
+      args:
+        NODE_ENV: production
+        AXIOS_BROWSER_BASE_URL: ${BACKEND_URL}
+        AXIOS_BASE_URL: http://nest-backend:2828
+        SENTRY_DNS: ${APP_SENTRY_DNS}
+        DEV_MODE: 'true'
+        VUE_APP_JITSI_APP_ID: ${VUE_APP_JITSI_APP_ID}
+        WEB_APP_AZURE_URL_PART1: ${WEB_APP_AZURE_URL_PART1}
+        WEB_APP_AZURE_URL_PART2: ${WEB_APP_AZURE_URL_PART2}
+        CLIENT_URL: ${CLIENT_URL}
+        LOCAL_ACCOUNT_ISSUER: ${LOCAL_ACCOUNT_ISSUER}
+        AZURE_AUTHORIZE_ENDPOINT: ${AZURE_AUTHORIZE_ENDPOINT}
+        AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+        WEB_APP_AZURE_SIGN_UP_URL: ${WEB_APP_AZURE_SIGN_UP_URL}
+        PASSWORD_RESET_URL: ${PASSWORD_RESET_URL}
+    ports:
+      - 3001:3000
+    depends_on:
+      - nest-backend
+      - cms
+
+  postgres:
+    volumes:
+      - type: volume
+        source: postgres_db
+        target: /var/lib/postgresql/data

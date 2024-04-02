@@ -1,0 +1,51 @@
+image: node:14
+
+include:
+  - template: 'Workflows/MergeRequest-Pipelines.gitlab-ci.yml'
+
+stages:
+  - build
+  - test
+
+cache:
+  key:
+    files:
+      - nest-backend/package.json
+      - web-app/package.json
+  paths:
+    - nest-backend/node_modules/
+    - web-app/node_modules/
+
+build-nest-backend:
+  stage: build
+  script:
+    - cd nest-backend
+    - yarn install
+    - yarn lint
+    - yarn build
+
+test-nest-backend:
+  stage: test
+  script:
+    - cd nest-backend
+    - yarn install
+    - yarn test comments/
+
+build-web-app:
+  stage: build
+  script:
+    - cd web-app
+    - yarn install
+    - yarn lint
+    - yarn build
+
+test-web-app:
+  stage: test
+  script:
+    - cd web-app
+    # install dependencies
+    - yarn
+    # start the server in the background
+    - yarn run dev
+    # run Cypress tests
+    - yarn run test:e2e:silent

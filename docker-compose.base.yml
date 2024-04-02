@@ -1,0 +1,155 @@
+version: "3"
+
+x-database: &database-config
+  DATABASE_CLIENT: postgres
+  DATABASE_HOST: ${DATABASE_HOST}
+  DATABASE_PORT: 5432
+  DATABASE_USERNAME: ${DATABASE_USERNAME}
+  DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+
+volumes:
+  postgres_db:
+
+services:
+  nginx:
+    container_name: nginx
+    image: pl_nginx:dev
+    build:
+      context: ./nginx
+      args:
+        TEMPLATE: ${NGINX_TEMPLATE}
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      STAGING_NAME: ${STAGING_NAME}
+    depends_on:
+      - cms
+      - nest-backend
+      - web-app
+
+  cms:
+    container_name: cms
+    image: strapi/strapi
+    environment:
+      <<: *database-config
+      DATABASE_NAME: ${CMS_DATABASE_NAME}
+      HOST: 0.0.0.0
+      PORT: 7999
+      ADMIN_JWT_SECRET: ${CMS_ADMIN_JWT_SECRET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      S3_BUCKET: ${CMS_S3_BUCKET}
+      CLIENT_URL: ${CLIENT_URL}
+      BACKEND_URL: ${BACKEND_URL}
+      CMS_URL: ${CMS_URL}
+      CMS_USERNAME: ${CMS_USERNAME}
+      CMS_PASSWORD: ${CMS_PASSWORD}
+    ports:
+      - "7999:7999"
+    tty: true
+
+  nest-backend:
+    container_name: nest-backend
+    image: nest-backend:dev
+    environment:
+      <<: *database-config
+      DOCKER: 'true'
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_NAME: ${NEST_DATABASE_NAME}
+      CASBIN_DATABASE_NAME: ${NEST_CASBIN_DATABASE_NAME}
+      PORT: 2828
+      NODE_ENV: development
+      CLIENT_URL: ${CLIENT_URL}
+      BACKEND_URL: ${BACKEND_URL}
+      CMS_URL: ${CMS_URL}
+      CMS_USERNAME: ${CMS_USERNAME}
+      CMS_PASSWORD: ${CMS_PASSWORD}
+      JWT_SECRET: ${NEST_JWT_SECRET}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      MAILCHIMP_USERNAME: ${MAILCHIMP_USERNAME}
+      MAILCHIMP_PASSWORD: ${MAILCHIMP_PASSWORD}
+      S3_BUCKET: ${NEST_S3_BUCKET}
+      DEMO: ${NEST_BACKEND_DEMO}
+      DATA_MIGRATION: ${NEST_DATA_MIGRATION}
+      SENTRY_DSN: ${NEST_SENTRY_DSN}
+      SENTRY_DEBUG: ""
+      SENTRY_RELEASE: ""
+      JITSI_API_KEY: ${JITSI_API_KEY}
+      JITSI_APP_ID: ${JITSI_APP_ID}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET}
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID}
+      GRAPH_TOKEN_URL: ${GRAPH_TOKEN_URL}
+      AZURE_AD_B2C_CLIENT_ID: ${AZURE_AD_B2C_CLIENT_ID}
+      AZURE_AD_B2C_CLIENT_SECRET: ${AZURE_AD_B2C_CLIENT_SECRET}
+      AZURE_AD_B2C_REDIRECT_URI: ${AZURE_AD_B2C_REDIRECT_URI}
+      SEED: ${SEED}
+      SEED_TENANT_OWNER_EMAIL: ${SEED_TENANT_OWNER_EMAIL}
+      SEED_TENANT_HOST: ${SEED_TENANT_HOST}
+      LOCAL_ACCOUNT_ISSUER: ${LOCAL_ACCOUNT_ISSUER}
+      DEMO_TENANT_HOST: ${DEMO_TENANT_HOST}
+      DEMO_TENANT_SEED: ${DEMO_TENANT_SEED}
+    ports:
+      - "2828:2828"
+    tty: true
+    stdin_open: true
+
+  nlp:
+    container_name: nlp
+    build: ./TextSummarizer
+    image: nlp:dev
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@posterlab.co
+      PGADMIN_DEFAULT_PASSWORD: development
+    ports:
+      - "8000:80"
+
+  postgres:
+    container_name: postgres
+    image: postgres:12.7
+    restart: always
+    volumes:
+      - type: volume
+        source: postgres_db
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./scripts/postgres
+        target: /docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    environment:
+      DATABASE_USERNAME: postgres
+      POSTGRES_PASSWORD: development
+      POSTGRES_MULTIPLE_DATABASES: dev_cms,dev_backend
+
+  web-app:
+    container_name: web-app
+    image: web-app:dev
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      NODE_ENV: development
+      AXIOS_BROWSER_BASE_URL: ${BACKEND_URL}
+      AXIOS_BASE_URL: http://nest-backend:2828
+      SENTRY_DNS: ${APP_SENTRY_DNS}
+      VUE_APP_JITSI_APP_ID: ${VUE_APP_JITSI_APP_ID}
+      WEB_APP_AZURE_URL_PART1: ${WEB_APP_AZURE_URL_PART1}
+      WEB_APP_AZURE_URL_PART2: ${WEB_APP_AZURE_URL_PART2}
+      CLIENT_URL: ${CLIENT_URL}
+      LOCAL_ACCOUNT_ISSUER: ${LOCAL_ACCOUNT_ISSUER}
+      AZURE_AUTHORIZE_ENDPOINT: ${AZURE_AUTHORIZE_ENDPOINT}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID}
+      WEB_APP_AZURE_SIGN_UP_URL: ${WEB_APP_AZURE_SIGN_UP_URL}
+      PASSWORD_RESET_URL: ${PASSWORD_RESET_URL}
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true

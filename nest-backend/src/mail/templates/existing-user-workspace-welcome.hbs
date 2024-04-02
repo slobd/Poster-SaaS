@@ -1,0 +1,18 @@
+
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    Hello,<br />
+    You have been successfully added to the <b>{{ workspaceName }}</b>
+    workspace. Kindly login to see the workspace in your workspace list.<br />
+
+    <!-- Action -->
+    {{>action.partial action=actionUrl text='Login' }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+
+</div>
+
+{{/layout.partial}}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_tenant_app_contents",
+  "info": {
+    "name": "appContent",
+    "icon": "box",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "indexPage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.index-page",
+      "required": true
+    },
+    "homePageText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.home-page-text",
+      "required": true
+    },
+    "autocompleteTopics": {
+      "collection": "topics" 
+    }
+  }
+}

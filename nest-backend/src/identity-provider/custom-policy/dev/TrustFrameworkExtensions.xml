@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="posterlabappdev.onmicrosoft.com" 
+  PolicyId="B2C_1A_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://posterlabappdev.onmicrosoft.com/B2C_1A_TrustFrameworkExtensions">
+  
+  <BasePolicy>
+    <TenantId>posterlabappdev.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+  </BasePolicy>
+     <BuildingBlocks>
+         <ClaimsSchema>
+             <ClaimType Id="jobTitle">
+                 <DisplayName>Job Title</DisplayName>
+                 <DataType>string</DataType>
+                 <UserInputType>TextBox</UserInputType>
+             </ClaimType>
+             <ClaimType Id="isForgotPassword">
+                 <DisplayName>isForgotPassword</DisplayName>
+                 <DataType>boolean</DataType>
+                 <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
+             </ClaimType>
+         </ClaimsSchema>
+         <ContentDefinitions>
+             <ContentDefinition Id="api.signuporsignin">
+                 <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.2</DataUri>
+             </ContentDefinition>
+         </ContentDefinitions>
+     </BuildingBlocks>
+
+    <ClaimsProviders>
+        <ClaimsProvider>
+            <Domain>posterlab.co</Domain>
+            <DisplayName>Microsoft Work Acc</DisplayName>
+            <TechnicalProfiles>
+                <TechnicalProfile Id="AADCommon-OpenIdConnect">
+                    <DisplayName>Sign in with Microsoft Work account</DisplayName>
+                    <Description>Sign in with your Microsoft account</Description>
+                    <Protocol Name="OpenIdConnect"/>
+                    <Metadata>
+                        <Item Key="METADATA">https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration</Item>
+                                        <!-- Update the Client ID below to the Application ID -->
+                      <Item Key="client_id">ba3a5e2a-59c6-4d1d-baef-f20014e191b9</Item>
+                      <Item Key="response_types">code</Item>
+                      <Item Key="scope">openid profile email</Item>
+                      <Item Key="response_mode">form_post</Item>
+                      <Item Key="HttpBinding">POST</Item>
+                      <Item Key="UsePolicyInRedirectUri">false</Item>
+                      <Item Key="DiscoverMetadataByTokenIssuer">true</Item>
+                      <!-- The key below allows you to specify each of the Azure AD tenants that can be used to sign in. Update the GUIDs below for each tenant. -->
+                      <Item Key="ValidTokenIssuerPrefixes">https://login.microsoftonline.com/5c1032d4-21d1-4fa4-92f5-7105bd157d67</Item>
+                      <!-- The commented key below specifies that users from any tenant can sign-in. Uncomment if you would like anyone with an Azure AD account to be able to sign in. -->
+                      <!-- <Item Key="ValidTokenIssuerPrefixes">https://login.microsoftonline.com/</Item> -->
+                  </Metadata>
+                  <CryptographicKeys>
+                      <Key Id="client_secret" StorageReferenceId="B2C_1A_AADAppSecret"/>
+                  </CryptographicKeys>
+                  <OutputClaims>
+                      <OutputClaim ClaimTypeReferenceId="issuerUserId" PartnerClaimType="oid"/>
+                      <OutputClaim ClaimTypeReferenceId="tenantId" PartnerClaimType="tid"/>
+                      <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="given_name" />
+                      <OutputClaim ClaimTypeReferenceId="surName" PartnerClaimType="family_name" />
+                      <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="socialIdpAuthentication" AlwaysUseDefaultValue="true" />
+                      <OutputClaim ClaimTypeReferenceId="identityProvider" PartnerClaimType="iss" />
+                      <OutputClaim ClaimTypeReferenceId="email" />
+                  </OutputClaims>
+                  <OutputClaimsTransformations>
+                      <OutputClaimsTransformation ReferenceId="CreateRandomUPNUserName"/>
+                      <OutputClaimsTransformation ReferenceId="CreateUserPrincipalName"/>
+                      <OutputClaimsTransformation ReferenceId="CreateAlternativeSecurityId"/>
+                      <OutputClaimsTransformation ReferenceId="CreateSubjectClaimFromAlternativeSecurityId"/>
+                  </OutputClaimsTransformations>
+                  <UseTechnicalProfileForSessionManagement ReferenceId="SM-SocialLogin"/>
+              </TechnicalProfile>
+          </TechnicalProfiles>
+      </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>Facebook</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="Facebook-OAUTH">
+          <Metadata>
+            <Item Key="client_id">facebook_clientid</Item>
+            <Item Key="scope">email public_profile</Item>
+            <Item Key="ClaimsEndpoint">https://graph.facebook.com/me?fields=id,first_name,last_name,name,email</Item>
+          </Metadata>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+
+    <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+         <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">68e05b8b-dd8f-424a-938c-9c2ece80e358</Item>
+            <Item Key="IdTokenAudience">412211a8-6697-452b-b51e-96118d01eec4</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="68e05b8b-dd8f-424a-938c-9c2ece80e358" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="412211a8-6697-452b-b51e-96118d01eec4" />
+          </InputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+     <ClaimsProvider>
+         <DisplayName>Local Account</DisplayName>
+         <TechnicalProfiles>
+             <!--Local account sign-up page-->
+             <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+                 <Metadata>
+                     <Item Key="setting.showCancelButton">false</Item>
+                 </Metadata>
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />
+                     <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+                     <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+                     <OutputClaim ClaimTypeReferenceId="givenName" />
+                     <OutputClaim ClaimTypeReferenceId="surName" />
+                     <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                 </OutputClaims>
+             </TechnicalProfile>
+         </TechnicalProfiles>
+     </ClaimsProvider>
+     <ClaimsProvider>
+         <DisplayName>Self Asserted</DisplayName>
+         <TechnicalProfiles>
+             <!--Federated account first-time sign-in page-->
+             <TechnicalProfile Id="SelfAsserted-Social">
+                 <Metadata>
+                     <Item Key="setting.showCancelButton">false</Item>
+                 </Metadata>
+                 <InputClaims>
+                     <InputClaim ClaimTypeReferenceId="jobTitle" />
+                 </InputClaims>
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="givenName"/>
+                     <OutputClaim ClaimTypeReferenceId="surname"/>
+                     <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                 </OutputClaims>
+             </TechnicalProfile>
+             <!--Edit profile page-->
+             <TechnicalProfile Id="SelfAsserted-ProfileUpdate">
+                 <InputClaims>
+                     <InputClaim ClaimTypeReferenceId="jobTitle" />
+                 </InputClaims>
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="givenName" />
+                     <OutputClaim ClaimTypeReferenceId="surname" />
+                     <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                 </OutputClaims>
+             </TechnicalProfile>
+         </TechnicalProfiles>
+     </ClaimsProvider>
+     <ClaimsProvider>
+         <DisplayName>Azure Active Directory</DisplayName>
+         <TechnicalProfiles>
+             <!-- Write data during a local account sign-up flow. -->
+             <TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
+                 <PersistedClaims>
+                     <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                 </PersistedClaims>
+             </TechnicalProfile>
+             <!-- Write data during a federated account first-time sign-in flow. -->
+             <TechnicalProfile Id="AAD-UserWriteUsingAlternativeSecurityId">
+                 <PersistedClaims>
+                     <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                 </PersistedClaims>
+             </TechnicalProfile>
+             <!-- Write data during edit profile flow. -->
+             <TechnicalProfile Id="AAD-UserWriteProfileUsingObjectId">
+                 <PersistedClaims>
+                     <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                 </PersistedClaims>
+             </TechnicalProfile>
+             <!-- Read data after user resets the password. -->
+             <TechnicalProfile Id="AAD-UserReadUsingEmailAddress">
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                 </OutputClaims>
+             </TechnicalProfile>
+             <!-- Read data after user authenticates with a local account. -->
+             <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                 </OutputClaims>
+             </TechnicalProfile>
+             <!-- Read data after user authenticates with a federated account. -->
+             <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId">
+                 <OutputClaims>
+                     <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                 </OutputClaims>
+             </TechnicalProfile>
+         </TechnicalProfiles>
+     </ClaimsProvider>
+    <ClaimsProvider>
+        <DisplayName>Local Account</DisplayName>
+        <TechnicalProfiles>
+            <TechnicalProfile Id="ForgotPassword">
+                <DisplayName>Forgot your password?</DisplayName>
+                <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+                <OutputClaims>
+                    <OutputClaim ClaimTypeReferenceId="isForgotPassword" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+                </OutputClaims>
+                <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+            </TechnicalProfile>
+            <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
+                <Metadata>
+                    <Item Key="setting.showCancelButton">false</Item>
+                    <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>
+                </Metadata>
+            </TechnicalProfile>
+        </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+
+    <UserJourneys>
+        <UserJourney Id="CombinedSignInAndSignUp">
+            <OrchestrationSteps>
+
+                <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+                    <ClaimsProviderSelections>
+                        <ClaimsProviderSelection TargetClaimsExchangeId="AzureADCommonExchange" />
+                        <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+                        <ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
+                    </ClaimsProviderSelections>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- Check if the user has selected to sign in using one of the social providers -->
+                <OrchestrationStep Order="2" Type="ClaimsExchange">
+                    <Preconditions>
+                        <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                            <Value>objectId</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AzureADCommonExchange" TechnicalProfileReferenceId="AADCommon-OpenIdConnect" />
+                        <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+                        <ClaimsExchange Id="ForgotPasswordExchange" TechnicalProfileReferenceId="ForgotPassword" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+                <OrchestrationStep Order="3" Type="InvokeSubJourney">
+                    <Preconditions>
+                        <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+                            <Value>isForgotPassword</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <JourneyList>
+                        <Candidate SubJourneyReferenceId="PasswordReset" />
+                    </JourneyList>
+                </OrchestrationStep>
+                <!-- For social IDP authentication, attempt to find the user account in the directory. -->
+                <OrchestrationStep Order="4" Type="ClaimsExchange">
+                    <Preconditions>
+                        <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                            <Value>authenticationSource</Value>
+                            <Value>localAccountAuthentication</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
+                  This can only happen when authentication happened using a social IDP. If local account was created or authentication done
+                  using ESTS in step 2, then an user account must exist in the directory by this time. -->
+                <OrchestrationStep Order="5" Type="ClaimsExchange">
+                    <Preconditions>
+                        <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                            <Value>objectId</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
+                  in the token. -->
+                <OrchestrationStep Order="6" Type="ClaimsExchange">
+                    <Preconditions>
+                        <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                            <Value>authenticationSource</Value>
+                            <Value>socialIdpAuthentication</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+                <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect
+                     from the user. So, in that case, create the user in the directory if one does not already exist
+                     (verified using objectId which would be set from the last step if account was created in the directory. -->
+                <OrchestrationStep Order="7" Type="ClaimsExchange">
+                    <Preconditions>
+                        <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                            <Value>objectId</Value>
+                            <Action>SkipThisOrchestrationStep</Action>
+                        </Precondition>
+                    </Preconditions>
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <OrchestrationStep Order="8" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+            </OrchestrationSteps>
+            <ClientDefinition ReferenceId="DefaultWeb" />
+        </UserJourney>
+	</UserJourneys>
+    <SubJourneys>
+        <SubJourney Id="PasswordReset" Type="Call">
+            <OrchestrationSteps>
+                <!-- Validate user's email address. -->
+                <OrchestrationStep Order="1" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- Collect and persist a new password. -->
+                <OrchestrationStep Order="2" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+            </OrchestrationSteps>
+        </SubJourney>
+    </SubJourneys>
+
+</TrustFrameworkPolicy>

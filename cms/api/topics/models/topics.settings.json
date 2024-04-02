@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "topics",
+  "info": {
+    "name": "Topics",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

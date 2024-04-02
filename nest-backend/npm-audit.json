@@ -1,0 +1,297 @@
+{
+    "actions": [
+        {
+            "isMajor": true,
+            "action": "install",
+            "resolves": [
+                {
+                    "id": 1067329,
+                    "path": "tailwindcss>parse-glob>glob-base>glob-parent",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                },
+                {
+                    "id": 1070012,
+                    "path": "tailwindcss>postcss-functions>postcss",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                }
+            ],
+            "module": "tailwindcss",
+            "target": "3.0.24"
+        },
+        {
+            "action": "review",
+            "module": "validator",
+            "resolves": [
+                {
+                    "id": 1067560,
+                    "path": "class-validator>validator",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                },
+                {
+                    "id": 1070050,
+                    "path": "class-validator>validator",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                }
+            ]
+        },
+        {
+            "action": "review",
+            "module": "class-validator",
+            "resolves": [
+                {
+                    "id": 1067582,
+                    "path": "class-validator",
+                    "dev": false,
+                    "bundled": false,
+                    "optional": false
+                }
+            ]
+        },
+        {
+            "action": "review",
+            "module": "nth-check",
+            "resolves": [
+                {
+                    "id": 1067654,
+                    "path": "@nestjs-modules/mailer>inline-css>cheerio>css-select>nth-check",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                },
+                {
+                    "id": 1067654,
+                    "path": "@nestjs-modules/mailer>inline-css>extract-css>list-stylesheets>cheerio>css-select>nth-check",
+                    "dev": false,
+                    "optional": false,
+                    "bundled": false
+                }
+            ]
+        }
+    ],
+    "advisories": {
+        "1067329": {
+            "findings": [
+                {
+                    "version": "2.0.0",
+                    "paths": ["tailwindcss>parse-glob>glob-base>glob-parent"]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": "<5.1.2",
+            "module_name": "glob-parent",
+            "severity": "high",
+            "github_advisory_id": "GHSA-ww39-953v-wcq6",
+            "cves": ["CVE-2020-28469"],
+            "access": "public",
+            "patched_versions": ">=5.1.2",
+            "cvss": {
+                "score": 7.5,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            "updated": "2022-03-30T21:18:41.000Z",
+            "recommendation": "Upgrade to version 5.1.2 or later",
+            "cwe": ["CWE-400"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1067329,
+            "references": "- https://nvd.nist.gov/vuln/detail/CVE-2020-28469\n- https://github.com/gulpjs/glob-parent/pull/36\n- https://github.com/gulpjs/glob-parent/blob/6ce8d11f2f1ed8e80a9526b1dc8cf3aa71f43474/index.js%23L9\n- https://github.com/gulpjs/glob-parent/releases/tag/v5.1.2\n- https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBES128-1059093\n- https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1059092\n- https://snyk.io/vuln/SNYK-JS-GLOBPARENT-1016905\n- https://www.oracle.com/security-alerts/cpujan2022.html\n- https://github.com/advisories/GHSA-ww39-953v-wcq6",
+            "created": "2021-06-07T21:56:34.000Z",
+            "reported_by": null,
+            "title": "Regular expression denial of service in glob-parent",
+            "npm_advisory_id": null,
+            "overview": "This affects the package glob-parent before 5.1.2. The enclosure regex used to check for strings ending in enclosure containing path separator.",
+            "url": "https://github.com/advisories/GHSA-ww39-953v-wcq6"
+        },
+        "1067560": {
+            "findings": [
+                {
+                    "version": "13.0.0",
+                    "paths": ["class-validator>validator"]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": "<13.7.0",
+            "module_name": "validator",
+            "severity": "moderate",
+            "github_advisory_id": "GHSA-qgmg-gppg-76g5",
+            "cves": ["CVE-2021-3765"],
+            "access": "public",
+            "patched_versions": ">=13.7.0",
+            "cvss": {
+                "score": 5.3,
+                "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            },
+            "updated": "2021-11-03T17:34:45.000Z",
+            "recommendation": "Upgrade to version 13.7.0 or later",
+            "cwe": ["CWE-1333"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1067560,
+            "references": "- https://nvd.nist.gov/vuln/detail/CVE-2021-3765\n- https://github.com/validatorjs/validator.js/commit/496fc8b2a7f5997acaaec33cc44d0b8dba5fb5e1\n- https://huntr.dev/bounties/c37e975c-21a3-4c5f-9b57-04d63b28cfc9\n- https://github.com/advisories/GHSA-qgmg-gppg-76g5",
+            "created": "2021-11-03T17:34:45.000Z",
+            "reported_by": null,
+            "title": "Inefficient Regular Expression Complexity in validator.js",
+            "npm_advisory_id": null,
+            "overview": "validator.js prior to 13.7.0 is vulnerable to Inefficient Regular Expression Complexity",
+            "url": "https://github.com/advisories/GHSA-qgmg-gppg-76g5"
+        },
+        "1067582": {
+            "findings": [
+                {
+                    "version": "0.12.2",
+                    "paths": ["class-validator"]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": "<=0.13.1",
+            "module_name": "class-validator",
+            "severity": "moderate",
+            "github_advisory_id": "GHSA-fj58-h2fr-3pp2",
+            "cves": ["CVE-2019-18413"],
+            "access": "public",
+            "patched_versions": "<0.0.0",
+            "cvss": {
+                "score": 9.8,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+            },
+            "updated": "2021-11-12T18:14:47.000Z",
+            "recommendation": "None",
+            "cwe": ["CWE-79", "CWE-89"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1067582,
+            "references": "- https://nvd.nist.gov/vuln/detail/CVE-2019-18413\n- https://github.com/typestack/class-validator/issues/438\n- https://github.com/typestack/class-validator#passing-options\n- https://github.com/typestack/class-validator/issues/438#issuecomment-964728471\n- https://github.com/advisories/GHSA-fj58-h2fr-3pp2",
+            "created": "2021-10-12T16:35:45.000Z",
+            "reported_by": null,
+            "title": "SQL Injection and Cross-site Scripting in class-validator",
+            "npm_advisory_id": null,
+            "overview": "In TypeStack class-validator 0.10.2, validate() input validation can be bypassed because certain internal attributes can be overwritten via a conflicting name. Even though there is an optional forbidUnknownValues parameter that can be used to reduce the risk of this bypass, this option is not documented and thus most developers configure input validation in the vulnerable default manner. With this vulnerability, attackers can launch SQL Injection or XSS attacks by injecting arbitrary malicious input. NOTE: a software maintainer agrees with the \"is not documented\" finding but suggests that much of the responsibility for the risk lies in a different product.",
+            "url": "https://github.com/advisories/GHSA-fj58-h2fr-3pp2"
+        },
+        "1067654": {
+            "findings": [
+                {
+                    "version": "1.0.2",
+                    "paths": [
+                        "@nestjs-modules/mailer>inline-css>cheerio>css-select>nth-check",
+                        "@nestjs-modules/mailer>inline-css>extract-css>list-stylesheets>cheerio>css-select>nth-check"
+                    ]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": "<2.0.1",
+            "module_name": "nth-check",
+            "severity": "moderate",
+            "github_advisory_id": "GHSA-rp65-9cf3-cjxr",
+            "cves": ["CVE-2021-3803"],
+            "access": "public",
+            "patched_versions": ">=2.0.1",
+            "cvss": {
+                "score": 7.5,
+                "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+            },
+            "updated": "2021-09-20T20:47:31.000Z",
+            "recommendation": "Upgrade to version 2.0.1 or later",
+            "cwe": ["CWE-1333"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1067654,
+            "references": "- https://nvd.nist.gov/vuln/detail/CVE-2021-3803\n- https://github.com/fb55/nth-check/commit/9894c1d2010870c351f66c6f6efcf656e26bb726\n- https://huntr.dev/bounties/8cf8cc06-d2cf-4b4e-b42c-99fafb0b04d0\n- https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
+            "created": "2021-09-20T20:47:31.000Z",
+            "reported_by": null,
+            "title": "Inefficient Regular Expression Complexity in nth-check",
+            "npm_advisory_id": null,
+            "overview": "nth-check is vulnerable to Inefficient Regular Expression Complexity",
+            "url": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr"
+        },
+        "1070012": {
+            "findings": [
+                {
+                    "version": "6.0.23",
+                    "paths": ["tailwindcss>postcss-functions>postcss"]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": "<7.0.36",
+            "module_name": "postcss",
+            "severity": "moderate",
+            "github_advisory_id": "GHSA-566m-qj78-rww5",
+            "cves": ["CVE-2021-23382"],
+            "access": "public",
+            "patched_versions": ">=7.0.36",
+            "cvss": {
+                "score": 5.3,
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            },
+            "updated": "2022-04-19T19:03:24.000Z",
+            "recommendation": "Upgrade to version 7.0.36 or later",
+            "cwe": ["CWE-400"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1070012,
+            "references": "- https://nvd.nist.gov/vuln/detail/CVE-2021-23382\n- https://github.com/postcss/postcss/commit/2b1d04c867995e55124e0a165b7c6622c1735956\n- https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1255641\n- https://snyk.io/vuln/SNYK-JS-POSTCSS-1255640\n- https://github.com/postcss/postcss/releases/tag/7.0.36\n- https://github.com/advisories/GHSA-566m-qj78-rww5",
+            "created": "2022-01-07T00:21:36.000Z",
+            "reported_by": null,
+            "title": "Regular Expression Denial of Service in postcss",
+            "npm_advisory_id": null,
+            "overview": "The package postcss versions before 7.0.36 or between 8.0.0 and 8.2.13 are vulnerable to Regular Expression Denial of Service (ReDoS) via getAnnotationURL() and loadAnnotation() in lib/previous-map.js. The vulnerable regexes are caused mainly by the sub-pattern \\/\\*\\s* sourceMappingURL=(.*).",
+            "url": "https://github.com/advisories/GHSA-566m-qj78-rww5"
+        },
+        "1070050": {
+            "findings": [
+                {
+                    "version": "13.0.0",
+                    "paths": ["class-validator>validator"]
+                }
+            ],
+            "metadata": null,
+            "vulnerable_versions": ">=11.1.0 <13.7.0",
+            "module_name": "validator",
+            "severity": "moderate",
+            "github_advisory_id": "GHSA-xx4c-jj58-r7x6",
+            "cves": [],
+            "access": "public",
+            "patched_versions": ">=13.7.0",
+            "cvss": {
+                "score": 5.3,
+                "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+            },
+            "updated": "2022-04-19T19:03:14.000Z",
+            "recommendation": "Upgrade to version 13.7.0 or later",
+            "cwe": ["CWE-1333"],
+            "found_by": null,
+            "deleted": null,
+            "id": 1070050,
+            "references": "- https://github.com/validatorjs/validator.js/security/advisories/GHSA-xx4c-jj58-r7x6\n- https://nvd.nist.gov/vuln/detail/CVE-2021-3765\n- https://github.com/validatorjs/validator.js/issues/1599\n- https://github.com/validatorjs/validator.js/pull/1738\n- https://huntr.dev/bounties/c37e975c-21a3-4c5f-9b57-04d63b28cfc9/\n- https://github.com/advisories/GHSA-xx4c-jj58-r7x6",
+            "created": "2021-11-19T20:14:23.000Z",
+            "reported_by": null,
+            "title": " Inefficient Regular Expression Complexity in Validator.js",
+            "npm_advisory_id": null,
+            "overview": "### Impact\nVersions of `validator` prior to 13.7.0 are affected by an inefficient Regular Expression complexity  when using the `rtrim` and `trim` sanitizers.\n\n### Patches\nThe problem has been patched in validator 13.7.0",
+            "url": "https://github.com/advisories/GHSA-xx4c-jj58-r7x6"
+        }
+    },
+    "muted": [],
+    "metadata": {
+        "vulnerabilities": {
+            "info": 0,
+            "low": 0,
+            "moderate": 6,
+            "high": 1,
+            "critical": 0
+        },
+        "dependencies": 757,
+        "devDependencies": 1208,
+        "optionalDependencies": 66,
+        "totalDependencies": 2023
+    },
+    "runId": "99a16f3e-dfa6-4c0a-95d0-076cf82414cc"
+}

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_tenant_information",
+  "info": {
+    "name": "information",
+    "icon": "address-card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "contactSupportUrl": {
+      "type": "string",
+      "required": true,
+      "default": "https://forms.clickup.com/f/heqhc-1901/R2AJ62RZFHX3WQF8AW"
+    },
+    "imprintUrl": {
+      "type": "string",
+      "required": true,
+      "default": "https://www.posterlab.co/imprint"
+    },
+    "privacyPolicyUrl": {
+      "type": "string",
+      "required": true,
+      "default": "https://doc.clickup.com/p/h/heqhc-1481/7d631935af4aa3f"
+    },
+    "termsOfUseUrl": {
+      "type": "string",
+      "required": true,
+      "default": "https://doc.clickup.com/p/h/heqhc-1461/eae2dcfa3dad82f"
+    },
+    "termsAndConditionUrl": {
+      "type": "string",
+      "required": true,
+      "default": "https://doc.clickup.com/p/h/heqhc-2321/4e540319baac667"
+    }
+  }
+}
