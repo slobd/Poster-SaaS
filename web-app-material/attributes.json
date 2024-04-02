@@ -1,0 +1,1 @@
+{ "v-can": { "description": "Used to check permissions. Requires `resource` and `action`" } }

@@ -1,0 +1,39 @@
+FROM node:16 as development
+
+WORKDIR /app
+
+COPY package.json .
+COPY prisma ./prisma/
+COPY assets ./assets/
+COPY yarn.lock .
+COPY jitsi_key.pk .
+RUN yarn install --production=false
+RUN yarn prisma generate
+
+COPY . .
+
+RUN yarn build
+
+FROM node:16 as production
+
+WORKDIR /app
+
+COPY package.json .
+COPY prisma ./prisma/
+COPY assets ./assets/
+COPY yarn.lock .
+COPY jitsi_key.pk .
+
+RUN yarn install --production=true
+
+RUN yarn prisma generate
+
+COPY initial-script.sh .
+COPY --from=development /app/dist ./dist
+COPY wait-for ./
+RUN chmod +x ./wait-for
+RUN apt-get -q update && apt-get -qy install netcat
+
+EXPOSE 2828
+
+CMD [ "bash", "initial-script.sh" ]

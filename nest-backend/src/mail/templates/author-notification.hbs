@@ -1,0 +1,18 @@
+
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    Hello {{ coAuthorFullName }},<br />
+    We are happy to inform you that you have been added as co-author of <b>{{ documentTitle }}</b> 
+    document by <em>{{ mainAuthorFullName }}</em> posted recently on {{ tenantName }}'s Workspace.
+    
+    <!-- Action -->
+    {{>action.partial action=actionUrl text='VIEW DOCUMENT' }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+
+</div>
+
+{{/layout.partial}}

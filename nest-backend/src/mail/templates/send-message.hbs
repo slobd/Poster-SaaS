@@ -1,0 +1,47 @@
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    <p style="
+            font-size: 16px;
+            line-height: 1.625;
+            color: #272727;
+            margin: 0.4em 0 1.1875em;
+        ">
+        {{ requester.firstName }} {{requester.lastName}} {{orgMessage}} has sent you this message:
+    </p>
+    <p style="
+            font-size: 16px;
+            line-height: 1.625;
+            color: #272727;
+            margin: 0.4em 0 1.1875em;
+        ">
+        {{message}}
+    </p>
+    
+    <p style="
+            font-size: 16px;
+            line-height: 1.625;
+            color: #272727;
+            margin: 0.4em 0 1.1875em;
+        ">
+        You can reply to this email to contact the sender directly.
+    </p>
+    
+    <p style="
+            font-size: 16px;
+            line-height: 1.625;
+            color: #272727;
+            margin: 0.4em 0 1.1875em;
+        ">
+        Want to know more about {{requester.firstName}}? Check his profile in PosterLab.
+    </p>
+
+    <!-- Action -->
+    {{>action.partial action=actionUrl text="VIEW PROFILE" }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+</div>
+
+{{/layout.partial}}

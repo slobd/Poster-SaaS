@@ -1,0 +1,149 @@
+{
+  "actions": [
+    {
+      "action": "review",
+      "module": "glob-parent",
+      "resolves": [
+        {
+          "id": 1067329,
+          "path": "nuxt>@nuxt/webpack>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+          "dev": false,
+          "optional": true,
+          "bundled": false
+        },
+        {
+          "id": 1067329,
+          "path": "nuxt>@nuxt/builder>@nuxt/webpack>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+          "dev": false,
+          "optional": true,
+          "bundled": false
+        }
+      ]
+    },
+    {
+      "action": "review",
+      "module": "nth-check",
+      "resolves": [
+        {
+          "id": 1067654,
+          "path": "nuxt>@nuxt/webpack>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        },
+        {
+          "id": 1067654,
+          "path": "nuxt>@nuxt/builder>@nuxt/webpack>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        },
+        {
+          "id": 1067654,
+          "path": "nuxt>@nuxt/builder>@nuxt/webpack>optimize-css-assets-webpack-plugin>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check",
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ]
+    }
+  ],
+  "advisories": {
+    "1067329": {
+      "findings": [
+        {
+          "version": "3.1.0",
+          "paths": [
+            "nuxt>@nuxt/webpack>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent",
+            "nuxt>@nuxt/builder>@nuxt/webpack>webpack>watchpack>watchpack-chokidar2>chokidar>glob-parent"
+          ]
+        }
+      ],
+      "metadata": null,
+      "vulnerable_versions": "<5.1.2",
+      "module_name": "glob-parent",
+      "severity": "high",
+      "github_advisory_id": "GHSA-ww39-953v-wcq6",
+      "cves": [
+        "CVE-2020-28469"
+      ],
+      "access": "public",
+      "patched_versions": ">=5.1.2",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "updated": "2022-03-30T21:18:41.000Z",
+      "recommendation": "Upgrade to version 5.1.2 or later",
+      "cwe": [
+        "CWE-400"
+      ],
+      "found_by": null,
+      "deleted": null,
+      "id": 1067329,
+      "references": "- https://nvd.nist.gov/vuln/detail/CVE-2020-28469\n- https://github.com/gulpjs/glob-parent/pull/36\n- https://github.com/gulpjs/glob-parent/blob/6ce8d11f2f1ed8e80a9526b1dc8cf3aa71f43474/index.js%23L9\n- https://github.com/gulpjs/glob-parent/releases/tag/v5.1.2\n- https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBES128-1059093\n- https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1059092\n- https://snyk.io/vuln/SNYK-JS-GLOBPARENT-1016905\n- https://www.oracle.com/security-alerts/cpujan2022.html\n- https://github.com/advisories/GHSA-ww39-953v-wcq6",
+      "created": "2021-06-07T21:56:34.000Z",
+      "reported_by": null,
+      "title": "Regular expression denial of service in glob-parent",
+      "npm_advisory_id": null,
+      "overview": "This affects the package glob-parent before 5.1.2. The enclosure regex used to check for strings ending in enclosure containing path separator.",
+      "url": "https://github.com/advisories/GHSA-ww39-953v-wcq6"
+    },
+    "1067654": {
+      "findings": [
+        {
+          "version": "1.0.2",
+          "paths": [
+            "nuxt>@nuxt/webpack>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check",
+            "nuxt>@nuxt/builder>@nuxt/webpack>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check",
+            "nuxt>@nuxt/builder>@nuxt/webpack>optimize-css-assets-webpack-plugin>cssnano>cssnano-preset-default>postcss-svgo>svgo>css-select>nth-check"
+          ]
+        }
+      ],
+      "metadata": null,
+      "vulnerable_versions": "<2.0.1",
+      "module_name": "nth-check",
+      "severity": "moderate",
+      "github_advisory_id": "GHSA-rp65-9cf3-cjxr",
+      "cves": [
+        "CVE-2021-3803"
+      ],
+      "access": "public",
+      "patched_versions": ">=2.0.1",
+      "cvss": {
+        "score": 7.5,
+        "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+      },
+      "updated": "2021-09-20T20:47:31.000Z",
+      "recommendation": "Upgrade to version 2.0.1 or later",
+      "cwe": [
+        "CWE-1333"
+      ],
+      "found_by": null,
+      "deleted": null,
+      "id": 1067654,
+      "references": "- https://nvd.nist.gov/vuln/detail/CVE-2021-3803\n- https://github.com/fb55/nth-check/commit/9894c1d2010870c351f66c6f6efcf656e26bb726\n- https://huntr.dev/bounties/8cf8cc06-d2cf-4b4e-b42c-99fafb0b04d0\n- https://github.com/advisories/GHSA-rp65-9cf3-cjxr",
+      "created": "2021-09-20T20:47:31.000Z",
+      "reported_by": null,
+      "title": "Inefficient Regular Expression Complexity in nth-check",
+      "npm_advisory_id": null,
+      "overview": "nth-check is vulnerable to Inefficient Regular Expression Complexity",
+      "url": "https://github.com/advisories/GHSA-rp65-9cf3-cjxr"
+    }
+  },
+  "muted": [],
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 2,
+      "critical": 0
+    },
+    "dependencies": 1574,
+    "devDependencies": 649,
+    "optionalDependencies": 30,
+    "totalDependencies": 2253
+  },
+  "runId": "cb27786a-ccb5-47ab-a3e7-8424a7d605f3"
+}

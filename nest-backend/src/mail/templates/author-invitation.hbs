@@ -1,0 +1,29 @@
+
+{{#> layout.partial }}
+
+<!-- Main content -->
+<div class="f-fallback">
+    Hello {{ coAuthorFullName }},<br />
+    We are happy to inform you that you have been added as co-author of <b>{{ documentTitle }}</b> 
+    document by <em>{{ mainAuthorFullName }}</em> posted recently on {{ tenantName }}'s Workspace.
+
+    <p
+        style="
+            font-size: 16px;
+            line-height: 1.625;
+            color: #272727;
+            margin: 0.4em 0 1.1875em;
+        "
+    >
+        Follow the link below to register
+    </p> 
+    
+    <!-- Action -->
+    {{>action.partial action=actionUrl text='REGISTER' }}
+
+    <!-- URL Copy -->
+    {{>url-copy.partial url=actionUrl }}
+
+</div>
+
+{{/layout.partial}}

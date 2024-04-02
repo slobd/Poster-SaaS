@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
+
+cd nest-backend || exit 1
+
+yarn && yarn prisma generate && yarn build
+
+cd ../web-app-material || exit 1
+
+yarn && yarn build

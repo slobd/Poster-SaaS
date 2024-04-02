@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+        PolicySchemaVersion="0.3.0.0"
+        TenantId="posterlabappdev.onmicrosoft.com"
+        PolicyId="B2C_1A_SignUpOnly"
+        PublicPolicyUri="http://posterlabappdev.onmicrosoft.com/B2C_1A_SignUpOnly">
+
+    <BasePolicy>
+        <TenantId>posterlabappdev.onmicrosoft.com</TenantId>
+        <PolicyId>B2C_1A_TrustFrameworkLocalization</PolicyId>
+    </BasePolicy>
+    <BuildingBlocks>
+        <ClaimsSchema>
+            <ClaimType Id="jobTitle">
+                <DisplayName>Job Title</DisplayName>
+                <DataType>string</DataType>
+                <UserInputType>TextBox</UserInputType>
+            </ClaimType>
+            <ClaimType Id="isForgotPassword">
+                <DisplayName>isForgotPassword</DisplayName>
+                <DataType>boolean</DataType>
+                <AdminHelpText>Whether the user has selected Forgot your Password</AdminHelpText>
+            </ClaimType>
+        </ClaimsSchema>
+        <ContentDefinitions>
+            <ContentDefinition Id="api.signuporsignin">
+                <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:2.1.2</DataUri>
+            </ContentDefinition>
+        </ContentDefinitions>
+    </BuildingBlocks>
+
+    <ClaimsProviders>
+        <ClaimsProvider>
+            <DisplayName>Local Account</DisplayName>
+            <TechnicalProfiles>
+                <!--Local account sign-up page-->
+                <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+                    <Metadata>
+                        <Item Key="setting.showCancelButton">false</Item>
+                    </Metadata>
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="Verified.Email" Required="true" />
+                        <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+                        <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+                        <OutputClaim ClaimTypeReferenceId="givenName" />
+                        <OutputClaim ClaimTypeReferenceId="surName" />
+                        <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                    </OutputClaims>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider>
+            <DisplayName>Self Asserted</DisplayName>
+            <TechnicalProfiles>
+                <!--Federated account first-time sign-in page-->
+                <TechnicalProfile Id="SelfAsserted-Social">
+                    <Metadata>
+                        <Item Key="setting.showCancelButton">false</Item>
+                    </Metadata>
+                    <InputClaims>
+                        <InputClaim ClaimTypeReferenceId="jobTitle" />
+                    </InputClaims>
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="givenName"/>
+                        <OutputClaim ClaimTypeReferenceId="surname"/>
+                        <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                    </OutputClaims>
+                </TechnicalProfile>
+                <!--Edit profile page-->
+                <TechnicalProfile Id="SelfAsserted-ProfileUpdate">
+                    <InputClaims>
+                        <InputClaim ClaimTypeReferenceId="jobTitle" />
+                    </InputClaims>
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="givenName" />
+                        <OutputClaim ClaimTypeReferenceId="surname" />
+                        <OutputClaim ClaimTypeReferenceId="jobTitle"/>
+                    </OutputClaims>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider>
+            <DisplayName>Azure Active Directory</DisplayName>
+            <TechnicalProfiles>
+                <!-- Write data during a local account sign-up flow. -->
+                <TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
+                    <PersistedClaims>
+                        <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                    </PersistedClaims>
+                </TechnicalProfile>
+                <!-- Write data during a federated account first-time sign-in flow. -->
+                <TechnicalProfile Id="AAD-UserWriteUsingAlternativeSecurityId">
+                    <PersistedClaims>
+                        <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                    </PersistedClaims>
+                </TechnicalProfile>
+                <!-- Write data during edit profile flow. -->
+                <TechnicalProfile Id="AAD-UserWriteProfileUsingObjectId">
+                    <PersistedClaims>
+                        <PersistedClaim ClaimTypeReferenceId="jobTitle"/>
+                    </PersistedClaims>
+                </TechnicalProfile>
+                <!-- Read data after user resets the password. -->
+                <TechnicalProfile Id="AAD-UserReadUsingEmailAddress">
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                    </OutputClaims>
+                </TechnicalProfile>
+                <!-- Read data after user authenticates with a local account. -->
+                <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                    </OutputClaims>
+                </TechnicalProfile>
+                <!-- Read data after user authenticates with a federated account. -->
+                <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId">
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="jobTitle" />
+                    </OutputClaims>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+        <ClaimsProvider>
+            <DisplayName>Local Account</DisplayName>
+            <TechnicalProfiles>
+                <TechnicalProfile Id="ForgotPassword">
+                    <DisplayName>Forgot your password?</DisplayName>
+                    <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"/>
+                    <OutputClaims>
+                        <OutputClaim ClaimTypeReferenceId="isForgotPassword" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+                    </OutputClaims>
+                    <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+                </TechnicalProfile>
+                <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
+                    <Metadata>
+                        <Item Key="setting.showCancelButton">false</Item>
+                        <Item Key="setting.forgotPasswordLinkOverride">ForgotPasswordExchange</Item>
+                    </Metadata>
+                </TechnicalProfile>
+            </TechnicalProfiles>
+        </ClaimsProvider>
+    </ClaimsProviders>
+
+    <UserJourneys>
+        <UserJourney Id="SignUpOnly">
+            <OrchestrationSteps>
+
+                <OrchestrationStep Order="1" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- This step reads any user attributes that we may not have received when in the token. -->
+                <OrchestrationStep Order="2" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+            </OrchestrationSteps>
+            <ClientDefinition ReferenceId="DefaultWeb" />
+        </UserJourney>
+    </UserJourneys>
+    <SubJourneys>
+        <SubJourney Id="PasswordReset" Type="Call">
+            <OrchestrationSteps>
+                <!-- Validate user's email address. -->
+                <OrchestrationStep Order="1" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+
+                <!-- Collect and persist a new password. -->
+                <OrchestrationStep Order="2" Type="ClaimsExchange">
+                    <ClaimsExchanges>
+                        <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+                    </ClaimsExchanges>
+                </OrchestrationStep>
+            </OrchestrationSteps>
+        </SubJourney>
+    </SubJourneys>
+
+</TrustFrameworkPolicy>

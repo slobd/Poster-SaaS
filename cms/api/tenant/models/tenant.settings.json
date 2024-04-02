@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tenants",
+  "info": {
+    "name": "Tenant",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "images": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.images",
+      "required": true
+    },
+    "css": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.css",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "host": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "features": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.features",
+      "required": true
+    },
+    "superadmin": {
+      "type": "component",
+      "repeatable": false,
+      "component": "tenant.superadmin",
+      "required": true
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "domain": {
+      "type": "string",
+      "unique": false
+    }
+  }
+}

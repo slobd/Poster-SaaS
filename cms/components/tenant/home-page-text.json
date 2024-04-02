@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_tenant_home_page_texts",
+  "info": {
+    "name": "homePageText",
+    "icon": "archway",
+    "description": ""
+  },
+    
+  "options": {},
+  "attributes": {
+    "body": {
+      "type": "richtext",
+      "default": "Where knowledge transfer happens. FAST."
+    }
+  }
+}

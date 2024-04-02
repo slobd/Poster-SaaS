@@ -1,0 +1,52 @@
+{
+  "name": "posterlab-digital",
+  "version": "1.0.0",
+  "repository": "git@gitlab.com:posterlab/posterlab-mvp.git",
+  "author": "PL Digital <dev@posterlab.co>",
+  "private": true,
+  "scripts": {
+    "postinstall": "husky install",
+    "precommit:nest-backend": "cd nest-backend && npm run precommit",
+    "precommit:web-app-material": "cd web-app-material && npm run precommit",
+    "precommit": "npm-run-all -s precommit:*",
+    "commit": "git-cz",
+    "format": "yarn format:nest-backend && yarn format:web-app",
+    "format:nest-backend": "cd nest-backend/ && yarn format && yarn lint:fix",
+    "format:web-app": "cd web-app-material/ && yarn format && yarn lint:fix",
+    "deploy:dev:up": "docker-compose -f docker-compose.base.yml -f docker-compose.dev.yml --env-file env/dev.env up -d web-app",
+    "deploy:dev:down": "docker --log-level error compose -f docker-compose.base.yml -f docker-compose.dev.yml --env-file env/dev.env down",
+    "deploy:staging:up": "docker-compose -f docker-compose.base.yml -f docker-compose.staging.yml --env-file env/staging.env up -d --build nginx",
+    "deploy:staging:down": "docker-compose -f docker-compose.base.yml -f docker-compose.staging.yml --env-file env/staging.env down",
+    "deploy:prod:up": "docker-compose -f docker-compose.base.yml -f docker-compose.prod.yml --env-file env/production.env up -d nginx",
+    "deploy:prod:down": "docker-compose -f docker-compose.base.yml -f docker-compose.prod.yml --env-file env/production.env down",
+    "postgres": "docker --log-level error compose -f docker-compose.base.yml -f docker-compose.dev.yml --env-file env/dev.env up -d postgres",
+    "docker:build": "docker-compose -f docker-compose.base.yml -f docker-compose.prod.yml --env-file env/production.env build",
+    "docker:push": "docker-compose -f docker-compose.base.yml -f docker-compose.prod.yml push",
+    "deploy:postgres": "yarn postgres",
+    "clean:postgres": "docker volume rm posterlab-mvp_postgres_db",
+    "restart:postgres": "yarn deploy:dev:down && yarn clean:postgres && yarn deploy:postgres",
+    "generate:sdk": "openapi-generator-cli generate --global-property skipFormModel=false -i nest-backend/openApiSpec.json -g typescript-axios -o web-app-material/sdk --additional-properties=useSingleRequestParameter=true",
+    "postgres:staging": "docker-compose -f docker-compose.base.yml -f docker-compose.staging.yml --env-file env/staging.env up -d postgres",
+    "deploy:postgres:staging": "yarn postgres:staging",
+    "clean:postgres:staging": "docker volume rm posterlab-mvp_postgres_db_staging",
+    "restart:postgres:staging": "yarn deploy:staging:down && yarn clean:postgres:staging && yarn deploy:postgres:staging"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "@commitlint/cz-commitlint": "^12.1.4",
+    "@commitlint/prompt-cli": "^12.1.4",
+    "commitizen": "^4.2.4",
+    "husky": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.4.26"
+  }
+}

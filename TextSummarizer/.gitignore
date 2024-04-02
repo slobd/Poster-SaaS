@@ -1,0 +1,6 @@
+/__pycache__/*
+/pdfarchive
+/**/*.html~
+**/corpus_tfIdf.mm.index
+**/corpus.mm.index
+**/dictionaryss.dict

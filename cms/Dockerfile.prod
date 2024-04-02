@@ -1,0 +1,25 @@
+# Not tested. Left it here for the future Docker production configuration
+FROM strapi/base
+
+WORKDIR /app
+
+COPY ./package.json ./
+COPY ./yarn.lock ./
+
+ARG NODE_ENV=production
+
+ENV NODE_ENV=${NODE_ENV}
+
+RUN yarn install
+
+COPY . .
+
+ARG CMS_URL
+
+ENV CMS_URL=${CMS_URL}
+
+RUN yarn build
+
+EXPOSE 7999
+
+CMD ["yarn", "start"]

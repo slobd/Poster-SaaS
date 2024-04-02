@@ -1,0 +1,460 @@
+[
+    {
+        "id": "1",
+        "name": "4-Step Kanban Board",
+        "description": "Generic template for a simple process for activities in 4-Steps. Source: Generic",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Review",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "Name of the task 1",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "Name of the task 2",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "Name of the task 3",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "Name of the task 4",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "Name of the task 5",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Innovation Thesis Definition",
+        "description": "Activities for defining an Innovation Thesis. Source: The Corporate Startup.",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "1. Pre-Workshop",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "2. Research",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "3. Workshop",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "4. Review",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "5. Options",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "6. Thesis",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "7. Iterate",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "Innovation Portfolio Definition",
+        "description": "Activities for defining an Innovation Portfolio. Source: The Corporate Startup.",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "1. Set the stage",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "2. Review Current Portfolio Against Target",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "3. Analyze the Gap",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "4. Make Investment Plans",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "5. Revise Innovation Thesis",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "4",
+        "name": "Innovation Framework",
+        "description": "High-Level stages of an Innovation framework. Source: The Corporate Startup.",
+        "statuses": [
+            "Ideation",
+            "Business planning",
+            "Product development",
+            "Launch"
+        ],
+        "cards": [
+            {
+                "title": "New Product Development 1",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "New Product Development 2",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "New Product Development 3",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "New Product Development 4",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "New Product Development 5",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "name": "Testing Ideas",
+        "description": "Steps to test ideas. Source: The Corporate Startup.",
+        "statuses": [
+            "Capture idea",
+            "Identify assumptions",
+            "Prioritize assumptions",
+            "Brainstorm tests",
+            "Falsifable hypothesis",
+            "Get out the building",
+            "Capture learnings",
+            "Make decisions"
+        ],
+        "cards": [
+            {
+                "title": "Name of the idea 1",
+                "description": "",
+                "status": "Capture idea"
+            },
+            {
+                "title": "Name of the idea 2",
+                "description": "",
+                "status": "Capture idea"
+            },
+            {
+                "title": "Name of the idea 3",
+                "description": "",
+                "status": "Capture idea"
+            },
+            {
+                "title": "Name of the idea 4",
+                "description": "",
+                "status": "Capture idea"
+            },
+            {
+                "title": "Name of the idea 5",
+                "description": "",
+                "status": "Capture idea"
+            }
+        ]
+    },
+    {
+        "id": "6",
+        "name": "Job-to-be-done Map",
+        "description": "A Board to describe the job to be done from a customers perspective. Source: The Corporate Startup.",
+        "statuses": [
+            "Trigger",
+            "Define job",
+            "Plan job",
+            "Execute job",
+            "Alter",
+            "Assess outcome",
+            "Conclude job"
+        ],
+        "cards": [
+            {
+                "title": "Name of the job 1",
+                "description": "",
+                "status": "Trigger"
+            },
+            {
+                "title": "Name of the job 2",
+                "description": "",
+                "status": "Trigger"
+            },
+            {
+                "title": "Name of the job 3",
+                "description": "",
+                "status": "Trigger"
+            },
+            {
+                "title": "Name of the job 4",
+                "description": "",
+                "status": "Trigger"
+            },
+            {
+                "title": "Name of the job 4",
+                "description": "",
+                "status": "Trigger"
+            }
+        ]
+    },
+    {
+        "id": "7",
+        "name": "Key Partner Mapping",
+        "description": "Assess your key partners for a business model. Source: The Corporate Startup.",
+        "statuses": [
+            "Research",
+            "Identify",
+            "Check reliability & dependency",
+            "Check replacability",
+            "Review"
+        ],
+        "cards": [
+            {
+                "title": "Name of the partner 1",
+                "description": "",
+                "status": "Research"
+            },
+            {
+                "title": "Name of the partner 2",
+                "description": "",
+                "status": "Research"
+            },
+            {
+                "title": "Name of the partner 3",
+                "description": "",
+                "status": "Research"
+            },
+            {
+                "title": "Name of the partner 4",
+                "description": "",
+                "status": "Research"
+            },
+            {
+                "title": "Name of the partner 5",
+                "description": "",
+                "status": "Research"
+            }
+        ]
+    },
+    {
+        "id": "8",
+        "name": "Building an innovation ecosystem",
+        "description": "Build an innovation ecosystem in 12 steps. Source: The Corporate Startup.",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "1. Explore your Context",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "2. Get executive Buy in",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "3. Develop Innovation Thesis",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "4. Map your portfolio",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "5. Choose Innovation Model",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "6. Create an Innovation Framework",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "7. Work with enabling functions",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "8. Create tools an platforms",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "9. Develop Innovation Capabilities",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "10. Set up investment boards",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "11. Choose key metrics",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "12. Build the community",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "9",
+        "name": "Partnership Health checklist",
+        "description": "Jobs-to-be-done to increase the odds for the partnership to be successful. Source: ASAP book, ISO 44001, Eli Lilly, other sources",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "1. Partnership mission",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "2. Expected ROI for each partners/Success criteria´s KPI´s/Collaborative benefits",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "3. People profile complete (skills)",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "4. Organization profile complete (capabilities, resources)",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "5. Counterparts/peering matrix (Roles & Responsibilities chart)",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "6. Partnership Steering committee",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "7. Escalation process",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "8. Partnership shared values/Partnership charter",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "9. Potential Risks/Mitigation",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "10. Communication & Knowledge transfer tools and processes",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "11. New partners (selection, onboarding)",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    },
+    {
+        "id": "10",
+        "name": "Partnership Legal checklist",
+        "description": "Standards docs to be signed at the beginning of a partnership and in some cases updated through the partnership life cycle. Source: ASAP book, ISO 44001, Eli Lilly, other sources.",
+        "statuses": [
+            "To do",
+            "In progress",
+            "Done"
+        ],
+        "cards": [
+            {
+                "title": "1. Memorandum of Understanding",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "2. Non-Disclosure Agreement",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "3. IP agreement",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "4. Exclusivity",
+                "description": "",
+                "status": "To do"
+            },
+            {
+                "title": "5. Non compete",
+                "description": "",
+                "status": "To do"
+            }
+        ]
+    }
+]

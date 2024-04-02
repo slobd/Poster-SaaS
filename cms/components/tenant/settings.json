@@ -1,0 +1,19 @@
+{
+    "collectionName": "components_tenant_settings",
+    "info": {
+        "name": "settings",
+        "icon": "sliders-h",
+        "description": ""
+    },
+    "options": {},
+    "attributes": {
+        "galleryPublicVisibility": {
+            "type": "boolean",
+            "default": false
+        },
+        "galleryOrganizationVisibility": {
+            "type": "boolean",
+            "default": true
+        }
+    }
+}

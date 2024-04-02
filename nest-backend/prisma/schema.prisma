@@ -1,0 +1,376 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["filterJson", "fullTextSearch", "interactiveTransactions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   Int      @id() @default(autoincrement())
+  objectId             String   @db.VarChar
+  firstName            String?  @db.VarChar
+  lastName             String?  @db.VarChar
+  email                String   @unique() @db.VarChar
+  subscribed           Boolean  @default(false)
+  privacyPolicy        Boolean
+  termOfUse            Boolean
+  organizationName     String?  @default("") @db.VarChar
+  disableNotifications Boolean  @default(false)
+  avatarId             Int?     @unique()
+  currentPosition      String?  @default("") @db.VarChar
+  biography            String?  @default("") @db.VarChar
+  createdAt            DateTime @default(now()) @db.Timestamp(6)
+  updatedAt            DateTime @default(now()) @updatedAt
+  isDummyUser          Boolean  @default(false)
+  linkedin             String?  @default("") @db.VarChar
+  researchGate         String?  @default("") @db.VarChar
+  twitter              String?  @default("") @db.VarChar
+
+  avatar               Upload?         @relation(fields: [avatarId], references: [id])
+  comments             Comment[]
+  posters              Poster[]        @relation("PosterAuthor")
+  authoredPosters      Poster[]        @relation("PosterCoauthor")
+  roles                RolesOnUsers[]
+  rules                Rule[]
+  userDirectories      UserDirectory[] @relation("UserDirectory")
+  guestUserDirectories UserDirectory[] @relation("GuestUserDirectory")
+  ownerTenants         Tenant[]
+  workspaces           Workspace[]
+  projects             Project[]       @relation("UserProject")
+  userAccount          UserAccount[]
+  ownedProjects        Project[]
+  Invite               Invite[]
+  skills               Skill[]
+  tasks                Task[]          @relation("TaskAssignee")
+}
+
+model Skill {
+  id    Int    @id() @default(autoincrement())
+  name  String @db.VarChar
+  users User[]
+
+  @@unique([name])
+}
+
+model Invite {
+  id          Int        @id() @default(autoincrement())
+  token       String     @unique()
+  email       String     @db.VarChar
+  role        Role?      @relation(fields: [roleId], references: [id])
+  roleId      Int
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  workspaceId Int
+  project     Project?   @relation(fields: [projectId], references: [id])
+  projectId   Int?
+  accepted    Boolean    @default(false)
+  enabled     Boolean    @default(true)
+  createdAt   DateTime   @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime   @default(now()) @updatedAt
+  updatedBy   User?      @relation(fields: [updatedById], references: [id])
+  updatedById Int?
+}
+
+model Tenant {
+  id            Int             @id() @default(autoincrement())
+  name          String          @unique() @db.VarChar
+  host          String          @unique() @db.VarChar
+  themeId       Int?            @unique()
+  ownerId       Int
+  owner         User            @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  enabled       Boolean?        @default(true)
+  createdAt     DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime        @default(now()) @db.Timestamp(6)
+  termOfUse     Boolean         @default(true)
+  logoId        Int?            @unique()
+  logo          Upload?         @relation(fields: [logoId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  roles         Role[]
+  features      TenantFeatures?
+  userDirectory UserDirectory?
+  domain        String?         @unique()
+  workspaces    Workspace[]
+}
+
+model TenantFeatures {
+  id               Int     @id() @default(autoincrement())
+  AccessControl    Boolean @default(true)
+  TenantManagement Boolean @default(true)
+  Workspace        Boolean @default(true)
+  Project          Boolean @default(true)
+  Gallery          Boolean @default(true)
+  People           Boolean @default(true)
+  Comment          Boolean @default(true)
+  Invite           Boolean @default(true)
+  Board            Boolean @default(true)
+  tenantId         Int?    @unique()
+  tenant           Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model UserDirectory {
+  id               Int                @id() @default(autoincrement())
+  users            User[]             @relation(name: "UserDirectory")
+  guestUsers       User[]             @relation(name: "GuestUserDirectory")
+  tenantId         Int                @unique
+  tenant           Tenant             @relation(fields: [tenantId], references: [id])
+  domain           String?            @unique()
+  // TODO: Rename to identityProviders
+  identityProvider IdentityProvider[]
+}
+
+model Workspace {
+  id          Int                     @id() @default(autoincrement())
+  name        String
+  description String?
+  visibility  WorkspaceVisibilityEnum
+  deleted     Boolean                 @default(false)
+  tenant      Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tenantId    Int
+  users       User[]
+  projects    Project[]
+  topics      Topic[]
+  keywords    Keyword[]
+  invite      Invite[]
+  posters     Poster[]
+}
+
+enum WorkspaceVisibilityEnum {
+  PUBLIC
+  PRIVATE
+  ORGANIZATION
+}
+
+model Project {
+  id              Int                   @id() @default(autoincrement())
+  name            String
+  visibility      ProjectVisibilityEnum
+  workspace       Workspace             @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId     Int
+  users           User[]                @relation("UserProject")
+  informationTabs InformationTab[]
+  boards          Board[]
+  invite          Invite[]
+  owner           User?                 @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId         Int?
+  deleted         Boolean               @default(false)
+  createdAt       DateTime              @default(now()) @db.Timestamp(6)
+  updatedAt       DateTime              @default(now()) @updatedAt
+}
+
+enum ProjectVisibilityEnum {
+  PUBLIC
+  PRIVATE
+}
+
+model InformationTab {
+  id          Int       @id() @default(autoincrement())
+  description String
+  topics      Topic[]
+  keywords    Keyword[]
+  attachments Upload[]
+  project     Project   @relation(fields: [projectId], references: [id])
+  projectId   Int
+}
+
+model Board {
+  id        Int          @id() @default(autoincrement())
+  title     String       @default("Task Board")
+  statuses  TaskStatus[]
+  tasks     Task[]
+  project   Project      @relation(fields: [projectId], references: [id])
+  projectId Int
+  createdAt DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt DateTime     @default(now()) @db.Timestamp(6)
+}
+
+model Task {
+  id               Int         @id() @default(autoincrement())
+  title            String
+  description      String
+  attachments      Upload[]
+  board            Board       @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  positionByStatus Decimal
+  boardId          Int
+  status           TaskStatus? @relation(fields: [statusId], references: [id])
+  statusId         Int?
+  dueDate          DateTime?
+  assignees        User[]      @relation("TaskAssignee")
+  createdAt        DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt        DateTime    @default(now()) @db.Timestamp(6)
+}
+
+model TaskStatus {
+  id        Int      @id() @default(autoincrement())
+  name      String
+  tasks     Task[]
+  board     Board    @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId   Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+}
+
+model IdentityProvider {
+  id              Int            @id() @default(autoincrement())
+  name            String         @unique
+  userDirectory   UserDirectory? @relation(fields: [userDirectoryId], references: [id])
+  userDirectoryId Int?
+  userAccount     UserAccount[]
+  domain          String         @unique
+  enabled         Boolean        @default(false)
+}
+
+model UserAccount {
+  id                 Int                    @id() @default(autoincrement())
+  identityProvider   IdentityProvider       @relation(fields: [identityProviderId], references: [id])
+  identityProviderId Int
+  user               User                   @relation(fields: [userId], references: [id])
+  userId             Int
+  objectId           String                 @unique
+  default            Boolean                @default(false)
+}
+
+model Comment {
+  id        Int      @id() @default(autoincrement())
+  content   String   @db.VarChar(600)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  authorId  Int?
+  posterId  Int?
+  user      User?    @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  poster    Poster?  @relation(fields: [posterId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model DataMigration {
+  id   Int      @id() @default(autoincrement())
+  date DateTime @default(now()) @db.Timestamp(6)
+  name String   @db.VarChar
+}
+
+model Poster {
+  id          Int      @id() @default(autoincrement())
+  title       String?  @db.VarChar
+  description String?  @db.VarChar
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @default(now()) @db.Timestamp(6)
+
+  imageId     Int?                 @unique()
+  image       Upload?              @relation("PosterImage", fields: [imageId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  pdfId       Int?                 @unique()
+  pdf         Upload?              @relation("PosterPdf", fields: [pdfId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  workspaceId Int?
+  workspace   Workspace?           @relation(fields: [workspaceId], references: [id], onUpdate: NoAction)
+  userId      Int?
+  user        User?                @relation("PosterAuthor", fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  visibility  PosterVisibilityEnum
+
+  authors  User[]    @relation("PosterCoauthor")
+  comments Comment[]
+  keywords Keyword[]
+  topics   Topic[]
+}
+
+enum PosterVisibilityEnum {
+  PUBLIC
+  PRIVATE
+}
+
+model Role {
+  id          Int            @id() @default(autoincrement())
+  system      Boolean        @default(false)
+  name        String         @db.VarChar
+  domain      String
+  tenantId    Int?
+  description String?        @default("") @db.VarChar
+  tenant      Tenant?        @relation(fields: [tenantId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users       RolesOnUsers[]
+  rules       Rule[]
+  invite      Invite[]
+
+  @@unique([name, tenantId, domain])
+}
+
+model RolesOnUsers {
+  roleId Int
+  userId Int
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([roleId, userId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+model RoleMigrations {
+  id        Int      @id() @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  roles     Json     @db.Json
+}
+
+model Topic {
+  id              Int              @id() @default(autoincrement())
+  name            String           @db.VarChar
+  workspace       Workspace        @relation(fields: [workspaceId], references: [id])
+  workspaceId     Int
+  informationTabs InformationTab[]
+  posters         Poster[]
+
+  @@unique([name, workspaceId])
+}
+
+model Keyword {
+  id             Int                @id() @default(autoincrement())
+  name           String             @db.VarChar
+  workspace      Workspace          @relation(fields: [workspaceId], references: [id])
+  workspaceId    Int
+  InformationTab InformationTab[]
+  posters        Poster[]
+
+  @@unique([name, workspaceId])
+}
+
+model Upload {
+  id                   Int     @id() @default(autoincrement())
+  fieldname            String? @db.VarChar
+  originalname         String  @db.VarChar
+  encoding             String  @db.VarChar
+  contentEncoding      String? @db.VarChar
+  mimetype             String  @db.VarChar
+  size                 Int
+  bucket               String  @db.VarChar
+  key                  String  @db.VarChar
+  acl                  String  @db.VarChar
+  contentType          String  @db.VarChar
+  contentDisposition   String?
+  storageClass         String  @db.VarChar
+  serverSideEncryption String?
+  metadata             Json?   @db.Json
+  location             String  @db.VarChar
+  etag                 String  @db.VarChar
+  tenant               Tenant?
+  user                 User?
+
+  // Poster
+  posterImage Poster? @relation("PosterImage")
+  posterPdf   Poster? @relation("PosterPdf")
+
+  informationTabId Int?
+  informationTab   InformationTab? @relation(fields: [informationTabId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Task             Task?           @relation(fields: [taskId], references: [id])
+  taskId           Int?
+}
+
+model Rule {
+  id      Int    @id @default(autoincrement())
+  subject String
+  action  String
+  fields  Json?  @db.Json
+  // If we store the options
+  options Json?  @db.Json
+  name    String
+  feature String
+  roleId  Int?
+  role    Role?  @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId  Int?
+  user    User?  @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}

@@ -1,0 +1,3229 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/auth/users/profiles": {
+            "patch": {
+                "operationId": "AuthController_updateProfile",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Auth"]
+            }
+        },
+        "/auth/redirect-uri": {
+            "get": {
+                "operationId": "AuthController_azureLogin",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "error",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Auth"]
+            }
+        },
+        "/auth/redirect-register-uri": {
+            "get": {
+                "operationId": "AuthController_azureRegister",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "error",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Auth"]
+            }
+        },
+        "/auth/reset-redirect-uri": {
+            "get": {
+                "operationId": "AuthController_azurePasswordReset",
+                "parameters": [
+                    {
+                        "name": "code",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "error",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Auth"]
+            }
+        },
+        "/auth/profile": {
+            "get": {
+                "operationId": "AuthController_getProfile",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Auth"]
+            }
+        },
+        "/iam/users": {
+            "get": {
+                "operationId": "UsersController_getAllUsersFromTenant",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["IAM - Users [Deprecated]"]
+            }
+        },
+        "/iam/users/{id}": {
+            "get": {
+                "operationId": "UsersController_getOneUserFromTenant",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["IAM - Users [Deprecated]"]
+            }
+        },
+        "/mail/newsletter": {
+            "post": {
+                "operationId": "MailController_newsletter",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewsletterDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Mail"]
+            }
+        },
+        "/azure/users": {
+            "get": {
+                "operationId": "AzureController_find",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Azure"]
+            },
+            "post": {
+                "operationId": "AzureController_create",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Azure"]
+            }
+        },
+        "/azure/users/email": {
+            "get": {
+                "operationId": "AzureController_findOne",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "boolean" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Azure"]
+            }
+        },
+        "/azure/users/{id}": {
+            "get": {
+                "operationId": "AzureController_findOneByEmail",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Azure"]
+            }
+        },
+        "/tenants/by-origin": {
+            "get": {
+                "operationId": "TenantController_findTenantByOrigin",
+                "parameters": [
+                    {
+                        "name": "origin",
+                        "required": true,
+                        "in": "header",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/tenants": {
+            "get": {
+                "operationId": "TenantController_findOneTenant",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "host",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "themeId",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            },
+            "post": {
+                "operationId": "TenantController_createTenant",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTenantAppDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/tenants/{id}/workspaces": {
+            "get": {
+                "operationId": "TenantController_getWorkspaces",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/tenants/cms": {
+            "post": {
+                "operationId": "TenantController_createTenantCMS",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTenantDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/tenants/cms/{id}": {
+            "patch": {
+                "operationId": "TenantController_updateTenantCMS",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTenantDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/tenants/{id}": {
+            "patch": {
+                "operationId": "TenantController_updateTenant",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTenantFromWebAppDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tenants"]
+            }
+        },
+        "/access-control/rules/metadata": {
+            "get": {
+                "operationId": "AccessControlController_getRulesMetadata",
+                "parameters": [],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Access Control"]
+            }
+        },
+        "/access-control/users/me/rules": {
+            "get": {
+                "operationId": "AccessControlController_getCurrentUserRules",
+                "parameters": [
+                    {
+                        "name": "feature",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "subject",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "enum": [
+                                "Poster",
+                                "Role",
+                                "User",
+                                "Tenant",
+                                "Workspace",
+                                "Project",
+                                "Comment",
+                                "Invite",
+                                "Task",
+                                "Board"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "create",
+                                    "read",
+                                    "list",
+                                    "update",
+                                    "delete",
+                                    "manage",
+                                    "joinBeforeStartData",
+                                    "requestCollaboration",
+                                    "join"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control"]
+            }
+        },
+        "/access-control/users/{id}/rules": {
+            "get": {
+                "operationId": "AccessControlController_getUserRules",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "feature",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "subject",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "enum": [
+                                "Poster",
+                                "Role",
+                                "User",
+                                "Tenant",
+                                "Workspace",
+                                "Project",
+                                "Comment",
+                                "Invite",
+                                "Task",
+                                "Board"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "create",
+                                    "read",
+                                    "list",
+                                    "update",
+                                    "delete",
+                                    "manage",
+                                    "joinBeforeStartData",
+                                    "requestCollaboration",
+                                    "join"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control"]
+            },
+            "post": {
+                "operationId": "AccessControlController_createRuleForUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateRuleDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control"]
+            }
+        },
+        "/access-control/users/{id}/roles": {
+            "post": {
+                "operationId": "UsersRolesController_giveRoleToUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "201": { "description": "" } },
+                "tags": ["Access Control - User Roles"]
+            },
+            "get": {
+                "operationId": "UsersRolesController_getRolesOfUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - User Roles"]
+            },
+            "patch": {
+                "operationId": "UsersRolesController_updateRoleOfUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Access Control - User Roles"]
+            },
+            "delete": {
+                "operationId": "UsersRolesController_deleteRoleFromUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - User Roles"]
+            }
+        },
+        "/access-control/users/me": {
+            "get": {
+                "operationId": "UsersRolesController_getRolesOfCurrentUser",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - User Roles"]
+            }
+        },
+        "/access-control/roles": {
+            "post": {
+                "operationId": "RolesController_createRole",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateRoleDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - Roles"]
+            },
+            "patch": {
+                "operationId": "RolesController_updateRole",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRoleDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - Roles"]
+            },
+            "get": {
+                "operationId": "RolesController_getRoles",
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Access Control - Roles"]
+            }
+        },
+        "/workspaces/{id}/users/{userId}": {
+            "get": {
+                "operationId": "WorkspacesUsersController_findOneUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces - User Management"]
+            }
+        },
+        "/workspaces/{id}/users": {
+            "get": {
+                "operationId": "WorkspacesUsersController_findUsers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces - User Management"]
+            }
+        },
+        "/workspaces/{workspaceId}/users/{userId}": {
+            "patch": {
+                "operationId": "WorkspacesUsersController_update",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUserRoleDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "200": { "description": "" } },
+                "tags": ["Workspaces - User Management"]
+            },
+            "delete": {
+                "operationId": "WorkspacesUsersController_delete",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "204": { "description": "" } },
+                "tags": ["Workspaces - User Management"]
+            }
+        },
+        "/workspaces/{id}/people/{userId}": {
+            "get": {
+                "operationId": "WorkspacePeopleController_findOneUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces - People"]
+            }
+        },
+        "/workspaces/{id}/people": {
+            "get": {
+                "operationId": "WorkspacePeopleController_findPeople",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces - People"]
+            }
+        },
+        "/workspaces/{id}/recommended/{userId}": {
+            "get": {
+                "operationId": "WorkspacePeopleController_recommendPeer",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SanitizedExpertDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces - People"]
+            }
+        },
+        "/workspaces/{id}/message/{userId}": {
+            "post": {
+                "operationId": "WorkspacePeopleController_sendMessage",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendMessageDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Workspaces - People"]
+            }
+        },
+        "/workspaces": {
+            "post": {
+                "operationId": "create_one_workspace",
+                "summary": "",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateWorkspaceDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces"]
+            },
+            "get": {
+                "operationId": "find_many_workspaces",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "tenantId",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "search",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces"]
+            }
+        },
+        "/workspaces/{id}": {
+            "get": {
+                "operationId": "find_one_workspace",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces"]
+            },
+            "patch": {
+                "operationId": "update_workspace",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateWorkspacesDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces"]
+            },
+            "delete": {
+                "operationId": "delete_workspace",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Workspaces"]
+            }
+        },
+        "/workspaces/{workspaceId}/projects": {
+            "post": {
+                "operationId": "ProjectController_create",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProjectDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Projects"]
+            },
+            "get": {
+                "operationId": "ProjectController_findMany",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Projects"]
+            }
+        },
+        "/workspaces/{workspaceId}/projects/{projectId}": {
+            "get": {
+                "operationId": "ProjectController_findOne",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "projectId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Projects"]
+            },
+            "delete": {
+                "operationId": "ProjectController_delete",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "projectId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Projects"]
+            }
+        },
+        "/workspaces/{workspaceId}/projects/{id}": {
+            "patch": {
+                "operationId": "ProjectController_update",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProjectDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "200": { "description": "" } },
+                "tags": ["Projects"]
+            }
+        },
+        "/workspaces/{workspaceId}/projects/{id}/uploads": {
+            "patch": {
+                "operationId": "ProjectController_uploadFile",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Projects"]
+            }
+        },
+        "/workspaces/{workspaceId}/projects/{id}/uploads/{uploadId}": {
+            "patch": {
+                "operationId": "ProjectController_deleteUpload",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "uploadId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Projects"]
+            }
+        },
+        "/uploads": {
+            "post": {
+                "operationId": "UploadsController_uploadFile",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Uploads"]
+            }
+        },
+        "/iam/invite/accept-invite": {
+            "get": {
+                "operationId": "InviteController_acceptUserInvitation",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "email",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Invites"]
+            }
+        },
+        "/iam/invite/public-invite": {
+            "get": {
+                "operationId": "InviteController_fetchPublicInvite",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Invites"]
+            }
+        },
+        "/iam/invite": {
+            "post": {
+                "operationId": "InviteController_inviteUser",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateInviteDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Invites"]
+            }
+        },
+        "/iam/invite/{id}": {
+            "patch": {
+                "operationId": "InviteController_updateInvitationStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePublicInviteStatus"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Invites"]
+            }
+        },
+        "/identity-provider": {
+            "get": {
+                "operationId": "IdentityProviderController_findAllIdp",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "domain",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "userDirectoryId",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "email",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": { "type": "object" }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Identity Providers"]
+            }
+        },
+        "/identity-provider/email": {
+            "get": {
+                "operationId": "IdentityProviderController_findIdpByDomain",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "name",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "domain",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "userDirectoryId",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "email",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Identity Providers"]
+            }
+        },
+        "/live-session": {
+            "post": {
+                "operationId": "Live_session_create",
+                "summary": "",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateLiveSessionDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Live Session"]
+            },
+            "get": {
+                "operationId": "Live_session_fetch",
+                "summary": "",
+                "parameters": [],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Live Session"]
+            }
+        },
+        "/live-session/generate-token": {
+            "post": {
+                "operationId": "LiveSessionController_generateJWTtoken",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GenerateJWTTokenDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Live Session"]
+            }
+        },
+        "/live-session/close": {
+            "post": {
+                "operationId": "Live_session_close",
+                "summary": "",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": { "schema": { "type": "string" } }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Live Session"]
+            }
+        },
+        "/workspaces/{workspaceId}/posters": {
+            "get": {
+                "operationId": "Poster_find_many",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "title",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "topics",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    },
+                    {
+                        "name": "keywords",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    },
+                    {
+                        "name": "authors",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    },
+                    {
+                        "name": "organizations",
+                        "required": false,
+                        "in": "query",
+                        "schema": {
+                            "type": "array",
+                            "items": { "type": "string" }
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "string" }
+                    },
+                    {
+                        "name": "or",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "default": false, "type": "boolean" }
+                    },
+                    {
+                        "name": "take",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "skip",
+                        "required": false,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Posters"]
+            },
+            "post": {
+                "operationId": "Poster_create",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePosterDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "201": { "description": "" } },
+                "tags": ["Posters"]
+            }
+        },
+        "/workspaces/{workspaceId}/posters/{id}": {
+            "get": {
+                "operationId": "Poster_find_one",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Posters"]
+            },
+            "patch": {
+                "operationId": "Poster_update",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePosterDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Posters"]
+            },
+            "delete": {
+                "operationId": "Poster_delete",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Posters"]
+            }
+        },
+        "/posters/{posterId}/comments": {
+            "post": {
+                "operationId": "CommentsController_create",
+                "parameters": [
+                    {
+                        "name": "posterId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCommentData"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "object" }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Comments"]
+            },
+            "get": {
+                "operationId": "CommentsController_find",
+                "parameters": [
+                    {
+                        "name": "posterId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Comments"]
+            }
+        },
+        "/posters/{posterId}/comments/{commentId}": {
+            "delete": {
+                "operationId": "CommentsController_delete",
+                "parameters": [
+                    {
+                        "name": "commentId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "posterId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Comments"]
+            }
+        },
+        "/boards/{id}": {
+            "get": {
+                "operationId": "find_one_board",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Board"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Boards"]
+            },
+            "patch": {
+                "operationId": "update_board",
+                "summary": "",
+                "description": "Update board fields by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateBoardDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Board"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Boards"]
+            },
+            "delete": {
+                "operationId": "delete_board",
+                "summary": "",
+                "description": "delete board by id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "200": { "description": "" } },
+                "tags": ["Boards"]
+            }
+        },
+        "/boards": {
+            "get": {
+                "operationId": "find_many_board",
+                "summary": "",
+                "description": "Dev only",
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "required": true,
+                        "in": "query",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Board"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Boards"]
+            },
+            "post": {
+                "operationId": "create_task_board",
+                "summary": "",
+                "description": "Create new task board",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateBoardDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Board"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Boards"]
+            }
+        },
+        "/tasks": {
+            "post": {
+                "operationId": "create_task",
+                "summary": "",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTaskDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tasks"]
+            }
+        },
+        "/tasks/{id}": {
+            "get": {
+                "operationId": "find_one_task",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tasks"]
+            },
+            "patch": {
+                "operationId": "update_task",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTaskDto"
+                            }
+                        }
+                    }
+                },
+                "responses": { "200": { "description": "" } },
+                "tags": ["Tasks"]
+            },
+            "delete": {
+                "operationId": "delete_task",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "204": { "description": "" } },
+                "tags": ["Tasks"]
+            }
+        },
+        "/tasks/{id}/uploads": {
+            "patch": {
+                "operationId": "create_task_upload",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Task"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Tasks"]
+            }
+        },
+        "/tasks/{taskId}/uploads/{uploadId}": {
+            "delete": {
+                "operationId": "delete_task_upload",
+                "summary": "",
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    },
+                    {
+                        "name": "uploadId",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "number" }
+                    }
+                ],
+                "responses": { "204": { "description": "" } },
+                "tags": ["Tasks"]
+            }
+        },
+        "/tests": {
+            "post": {
+                "operationId": "TestsController_create",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "operationId": "TestsController_findAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tests/{id}": {
+            "get": {
+                "operationId": "TestsController_findOne",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "TestsController_update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTestDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "TestsController_remove",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "info": {
+        "title": "Posters example",
+        "description": "The posters API description",
+        "version": "1.0",
+        "contact": {}
+    },
+    "tags": [{ "name": "posters", "description": "" }],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "SkillDto": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "Upload": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "fieldname": { "type": "string" },
+                    "originalname": { "type": "string" },
+                    "encoding": { "type": "string" },
+                    "contentEncoding": { "type": "string" },
+                    "mimetype": { "type": "string" },
+                    "size": { "type": "number" },
+                    "bucket": { "type": "string" },
+                    "key": { "type": "string" },
+                    "acl": { "type": "string" },
+                    "contentType": { "type": "string" },
+                    "contentDisposition": { "type": "string" },
+                    "storageClass": { "type": "string" },
+                    "serverSideEncryption": { "type": "string" },
+                    "metadata": { "type": "object" },
+                    "location": { "type": "string" },
+                    "etag": { "type": "string" },
+                    "versionId": { "type": "string" }
+                },
+                "required": [
+                    "id",
+                    "fieldname",
+                    "originalname",
+                    "encoding",
+                    "contentEncoding",
+                    "mimetype",
+                    "size",
+                    "bucket",
+                    "key",
+                    "acl",
+                    "contentType",
+                    "contentDisposition",
+                    "storageClass",
+                    "serverSideEncryption",
+                    "metadata",
+                    "location",
+                    "etag",
+                    "versionId"
+                ]
+            },
+            "UpdateProfileData": {
+                "type": "object",
+                "properties": {
+                    "firstName": { "type": "string" },
+                    "lastName": { "type": "string" },
+                    "disableNotifications": { "type": "boolean" },
+                    "linkedin": { "type": "string" },
+                    "researchGate": { "type": "string" },
+                    "twitter": { "type": "string" },
+                    "skills": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/SkillDto" }
+                    },
+                    "avatar": { "$ref": "#/components/schemas/Upload" },
+                    "currentPosition": { "type": "string", "maxLength": 200 },
+                    "biography": { "type": "string", "maxLength": 600 },
+                    "organizationName": { "type": "string", "maxLength": 300 }
+                }
+            },
+            "UpdateProfileDto": {
+                "type": "object",
+                "properties": {
+                    "avatar": {
+                        "type": "string",
+                        "format": "binary",
+                        "description": ".jpeg file"
+                    },
+                    "data": {
+                        "description": "Schema: UpdateProfileData",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/UpdateProfileData" }
+                        ]
+                    }
+                },
+                "required": ["avatar", "data"]
+            },
+            "NewsletterDto": {
+                "type": "object",
+                "properties": { "email": { "type": "string" } },
+                "required": ["email"]
+            },
+            "TenantSuperadmin": {
+                "type": "object",
+                "properties": {
+                    "firstName": { "type": "string" },
+                    "lastName": { "type": "string" },
+                    "email": { "type": "string" }
+                },
+                "required": ["firstName", "lastName", "email"]
+            },
+            "TenantTheme": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "tenantId": { "type": "string" },
+                    "name": { "type": "string" },
+                    "host": { "type": "string" },
+                    "domain": { "type": "string" },
+                    "enabled": { "type": "boolean" },
+                    "superadmin": {
+                        "$ref": "#/components/schemas/TenantSuperadmin"
+                    },
+                    "features": { "type": "object" },
+                    "images": { "type": "object" },
+                    "css": { "type": "object" }
+                },
+                "required": [
+                    "name",
+                    "host",
+                    "domain",
+                    "enabled",
+                    "superadmin",
+                    "features",
+                    "images",
+                    "css"
+                ]
+            },
+            "Tenant": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "host": { "type": "string" },
+                    "roles": { "type": "array", "items": { "type": "object" } },
+                    "themeId": { "type": "number" },
+                    "logo": { "$ref": "#/components/schemas/Upload" },
+                    "logoId": { "type": "number", "nullable": true },
+                    "ownerId": { "type": "number" },
+                    "termOfUse": { "type": "boolean" },
+                    "enabled": { "type": "boolean" },
+                    "features": {
+                        "$ref": "#/components/schemas/TenantFeatures"
+                    },
+                    "theme": { "$ref": "#/components/schemas/TenantTheme" },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" },
+                    "domain": { "type": "string", "nullable": true }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "host",
+                    "themeId",
+                    "logoId",
+                    "ownerId",
+                    "termOfUse",
+                    "enabled",
+                    "createdAt",
+                    "updatedAt",
+                    "domain"
+                ]
+            },
+            "TenantFeatures": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "AccessControl": { "type": "boolean" },
+                    "TenantManagement": { "type": "boolean" },
+                    "Workspace": { "type": "boolean" },
+                    "Project": { "type": "boolean" },
+                    "Gallery": { "type": "boolean" },
+                    "People": { "type": "boolean" },
+                    "Comment": { "type": "boolean" },
+                    "tenant": { "$ref": "#/components/schemas/Tenant" }
+                },
+                "required": [
+                    "AccessControl",
+                    "TenantManagement",
+                    "Workspace",
+                    "Project",
+                    "Gallery",
+                    "People",
+                    "Comment"
+                ]
+            },
+            "CreateTenantDto": {
+                "type": "object",
+                "properties": {
+                    "superadmin": {
+                        "$ref": "#/components/schemas/TenantSuperadmin"
+                    },
+                    "name": { "type": "string" },
+                    "host": { "type": "string" },
+                    "features": {
+                        "$ref": "#/components/schemas/TenantFeatures"
+                    },
+                    "themeId": { "type": "number" },
+                    "enabled": { "type": "boolean" },
+                    "logo": { "$ref": "#/components/schemas/Upload" },
+                    "domain": { "type": "string", "nullable": true }
+                },
+                "required": [
+                    "superadmin",
+                    "name",
+                    "host",
+                    "themeId",
+                    "enabled",
+                    "domain"
+                ]
+            },
+            "UpdateTenantDto": {
+                "type": "object",
+                "properties": {
+                    "superadmin": {
+                        "$ref": "#/components/schemas/TenantSuperadmin"
+                    },
+                    "name": { "type": "string" },
+                    "host": { "type": "string" },
+                    "features": {
+                        "$ref": "#/components/schemas/TenantFeatures"
+                    },
+                    "enabled": { "type": "boolean" },
+                    "domain": { "type": "string", "nullable": true }
+                }
+            },
+            "CreateTenantAppDto": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "host": { "type": "string" },
+                    "logo": { "$ref": "#/components/schemas/Upload" },
+                    "domain": { "type": "string", "nullable": true }
+                },
+                "required": ["name", "host", "domain"]
+            },
+            "UpdateTenantFromWebAppDto": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "CreateRuleDto": {
+                "type": "object",
+                "properties": {
+                    "feature": { "type": "string" },
+                    "name": { "type": "string" },
+                    "options": { "type": "object" },
+                    "userId": { "type": "number" }
+                },
+                "required": ["feature", "name", "options"]
+            },
+            "CreateRoleDto": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "domain": { "type": "string" },
+                    "description": { "type": "string" },
+                    "rules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateRuleDto"
+                        }
+                    }
+                },
+                "required": ["name", "domain", "description", "rules"]
+            },
+            "UpdateRoleDto": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "domain": { "type": "string" },
+                    "description": { "type": "string" },
+                    "rules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateRuleDto"
+                        }
+                    }
+                },
+                "required": ["id", "rules"]
+            },
+            "UpdateUserRoleDto": {
+                "type": "object",
+                "properties": { "roleId": { "type": "number" } },
+                "required": ["roleId"]
+            },
+            "SanitizedExpertDto": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "objectId": { "type": "string" },
+                    "organizationName": { "type": "string", "nullable": true },
+                    "firstName": { "type": "string" },
+                    "lastName": { "type": "string" },
+                    "email": { "type": "string" },
+                    "isDummyUser": { "type": "boolean" },
+                    "disableNotifications": { "type": "boolean" },
+                    "linkedin": { "type": "string" },
+                    "researchGate": { "type": "string" },
+                    "twitter": { "type": "string" },
+                    "currentPosition": { "type": "string", "nullable": true },
+                    "biography": { "type": "string", "nullable": true },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" },
+                    "avatarId": { "type": "number", "nullable": true },
+                    "avatar": { "$ref": "#/components/schemas/Upload" },
+                    "authoredPosters": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "roles": { "type": "array", "items": { "type": "object" } },
+                    "comments": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "userDirectory": { "type": "object" },
+                    "skills": { "type": "array", "items": { "type": "object" } }
+                },
+                "required": [
+                    "id",
+                    "objectId",
+                    "organizationName",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "isDummyUser",
+                    "disableNotifications",
+                    "linkedin",
+                    "researchGate",
+                    "twitter",
+                    "currentPosition",
+                    "biography",
+                    "createdAt",
+                    "updatedAt",
+                    "avatarId"
+                ]
+            },
+            "SendMessageDto": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1000
+                    }
+                },
+                "required": ["message"]
+            },
+            "CreateWorkspaceDto": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "description": { "type": "string" },
+                    "visibility": { "type": "object" },
+                    "tenantId": { "type": "number" }
+                },
+                "required": ["name", "description", "visibility", "tenantId"]
+            },
+            "UpdateWorkspacesDto": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "description": { "type": "string" },
+                    "visibility": { "type": "object" }
+                }
+            },
+            "CreateProjectDto": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string" },
+                    "workspaceId": { "type": "number" },
+                    "tenantId": { "type": "number" }
+                },
+                "required": ["name", "workspaceId", "tenantId"]
+            },
+            "UpdateInformationTabDto": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "description": { "type": "string" },
+                    "topics": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "keywords": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    }
+                }
+            },
+            "UpdateProjectDto": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "visibility": { "type": "object" },
+                    "informationTab": {
+                        "$ref": "#/components/schemas/UpdateInformationTabDto"
+                    },
+                    "tenantId": { "type": "number" }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "visibility",
+                    "informationTab",
+                    "tenantId"
+                ]
+            },
+            "CreateInviteDto": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string" },
+                    "roleId": { "type": "number" },
+                    "tenantId": { "type": "number" },
+                    "workspaceId": { "type": "number" },
+                    "projectId": { "type": "number" }
+                },
+                "required": [
+                    "email",
+                    "roleId",
+                    "tenantId",
+                    "workspaceId",
+                    "projectId"
+                ]
+            },
+            "UpdatePublicInviteStatus": {
+                "type": "object",
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "workspaceId": { "type": "number" }
+                },
+                "required": ["enabled", "workspaceId"]
+            },
+            "CreateLiveSessionDto": {
+                "type": "object",
+                "properties": { "roomName": { "type": "string" } },
+                "required": ["roomName"]
+            },
+            "GenerateJWTTokenDto": {
+                "type": "object",
+                "properties": { "slug": { "type": "string" } },
+                "required": ["slug"]
+            },
+            "CreatePosterDataWorkspace": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "tenantId": { "type": "number" }
+                },
+                "required": ["id", "tenantId"]
+            },
+            "KeywordDto": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "TopicDto": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "AuthorDto": {
+                "type": "object",
+                "properties": { "id": { "type": "number" } },
+                "required": ["id"]
+            },
+            "CreatePosterData": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "workspace": {
+                        "$ref": "#/components/schemas/CreatePosterDataWorkspace"
+                    },
+                    "description": { "type": "string" },
+                    "keywords": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/KeywordDto" }
+                    },
+                    "topics": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/TopicDto" }
+                    },
+                    "visibility": { "type": "object" },
+                    "authors": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/AuthorDto" }
+                    }
+                },
+                "required": ["title", "workspace", "visibility", "authors"]
+            },
+            "CreatePosterDto": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "string",
+                        "format": "binary",
+                        "description": ".jpeg file"
+                    },
+                    "pdf": {
+                        "type": "string",
+                        "format": "binary",
+                        "description": ".pdf file"
+                    },
+                    "data": {
+                        "description": "Schema: CreatePosterData",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/CreatePosterData" }
+                        ]
+                    }
+                },
+                "required": ["image", "pdf", "data"]
+            },
+            "PosterUpdateUploadDto": {
+                "type": "object",
+                "properties": { "id": { "type": "number" } },
+                "required": ["id"]
+            },
+            "UpdatePosterData": {
+                "type": "object",
+                "properties": {
+                    "pdf": {
+                        "$ref": "#/components/schemas/PosterUpdateUploadDto"
+                    },
+                    "image": {
+                        "$ref": "#/components/schemas/PosterUpdateUploadDto"
+                    },
+                    "title": { "type": "string" },
+                    "workspace": {
+                        "$ref": "#/components/schemas/CreatePosterDataWorkspace"
+                    },
+                    "description": { "type": "string" },
+                    "keywords": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/KeywordDto" }
+                    },
+                    "topics": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/TopicDto" }
+                    },
+                    "visibility": { "type": "object" },
+                    "authors": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/AuthorDto" }
+                    }
+                }
+            },
+            "UpdatePosterDto": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "string",
+                        "format": "binary",
+                        "description": ".jpeg file"
+                    },
+                    "pdf": {
+                        "type": "string",
+                        "format": "binary",
+                        "description": ".pdf file"
+                    },
+                    "data": {
+                        "description": "Schema: UpdatePosterData",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/UpdatePosterData" }
+                        ]
+                    }
+                },
+                "required": ["image", "pdf", "data"]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "objectId": { "type": "string" },
+                    "organizationName": { "type": "string", "nullable": true },
+                    "firstName": { "type": "string" },
+                    "lastName": { "type": "string" },
+                    "email": { "type": "string" },
+                    "isDummyUser": { "type": "boolean" },
+                    "subscribed": { "type": "boolean" },
+                    "privacyPolicy": { "type": "boolean" },
+                    "termOfUse": { "type": "boolean" },
+                    "disableNotifications": { "type": "boolean" },
+                    "linkedin": { "type": "string" },
+                    "researchGate": { "type": "string" },
+                    "twitter": { "type": "string" },
+                    "currentPosition": { "type": "string", "nullable": true },
+                    "biography": { "type": "string", "nullable": true },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" },
+                    "avatarId": { "type": "number", "nullable": true },
+                    "avatar": { "$ref": "#/components/schemas/Upload" },
+                    "posters": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "authoredPosters": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "roles": { "type": "array", "items": { "type": "object" } },
+                    "comments": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "userDirectory": { "type": "object" },
+                    "skills": { "type": "array", "items": { "type": "object" } }
+                },
+                "required": [
+                    "id",
+                    "objectId",
+                    "organizationName",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "isDummyUser",
+                    "subscribed",
+                    "privacyPolicy",
+                    "termOfUse",
+                    "disableNotifications",
+                    "linkedin",
+                    "researchGate",
+                    "twitter",
+                    "currentPosition",
+                    "biography",
+                    "createdAt",
+                    "updatedAt",
+                    "avatarId"
+                ]
+            },
+            "Keyword": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "Topic": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "Poster": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "user": { "$ref": "#/components/schemas/User" },
+                    "userId": { "type": "number" },
+                    "workspaceId": { "type": "number" },
+                    "comments": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "pdf": { "type": "object" },
+                    "pdfId": { "type": "number" },
+                    "image": { "type": "object" },
+                    "imageId": { "type": "number" },
+                    "visibility": { "type": "object" },
+                    "keywords": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Keyword" }
+                    },
+                    "topics": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Topic" }
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" }
+                },
+                "required": [
+                    "id",
+                    "userId",
+                    "workspaceId",
+                    "title",
+                    "description",
+                    "pdf",
+                    "pdfId",
+                    "image",
+                    "imageId",
+                    "visibility",
+                    "keywords",
+                    "topics",
+                    "authors",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "CreateCommentData": {
+                "type": "object",
+                "properties": {
+                    "content": { "type": "string" },
+                    "author": { "type": "object" },
+                    "posterId": { "type": "number" }
+                },
+                "required": ["content", "author", "posterId"]
+            },
+            "Status": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "name": { "type": "string" },
+                    "boardId": { "type": "number" },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" }
+                },
+                "required": ["id", "name", "boardId", "createdAt", "updatedAt"]
+            },
+            "Decimal": { "type": "object", "properties": {} },
+            "Task": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "status": { "$ref": "#/components/schemas/Status" },
+                    "positionByStatus": {
+                        "$ref": "#/components/schemas/Decimal"
+                    },
+                    "attachments": {
+                        "type": "array",
+                        "items": { "type": "object" }
+                    },
+                    "assignees": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/User" }
+                    },
+                    "dueDate": { "format": "date-time", "type": "string" },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "positionByStatus",
+                    "attachments",
+                    "assignees",
+                    "dueDate",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "Board": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "number" },
+                    "title": { "type": "string" },
+                    "projectId": { "type": "number" },
+                    "statuses": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Status" }
+                    },
+                    "tasks": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/Task" }
+                    },
+                    "createdAt": { "format": "date-time", "type": "string" },
+                    "updatedAt": { "format": "date-time", "type": "string" }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "projectId",
+                    "statuses",
+                    "tasks",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "CreateBoardDtoProject": {
+                "type": "object",
+                "properties": {
+                    "visibility": {
+                        "type": "string",
+                        "enum": ["PUBLIC", "PRIVATE"]
+                    },
+                    "workspaceId": { "type": "number" }
+                },
+                "required": ["visibility", "workspaceId"]
+            },
+            "CreateBoardDtoTaskStatus": {
+                "type": "object",
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+            },
+            "CreateBoardDtoTask": {
+                "type": "object",
+                "properties": {
+                    "status": { "type": "string" },
+                    "title": { "type": "string" },
+                    "description": { "type": "string" }
+                },
+                "required": ["status", "title", "description"]
+            },
+            "CreateBoardDto": {
+                "type": "object",
+                "properties": {
+                    "projectId": { "type": "number" },
+                    "title": { "type": "string" },
+                    "project": {
+                        "$ref": "#/components/schemas/CreateBoardDtoProject"
+                    },
+                    "statuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateBoardDtoTaskStatus"
+                        }
+                    },
+                    "cards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateBoardDtoTask"
+                        }
+                    }
+                },
+                "required": ["projectId", "title", "project"]
+            },
+            "UpdateBoardDto": {
+                "type": "object",
+                "properties": {
+                    "projectId": { "type": "number" },
+                    "title": { "type": "string" },
+                    "project": {
+                        "$ref": "#/components/schemas/CreateBoardDtoProject"
+                    },
+                    "statuses": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateBoardDtoTaskStatus"
+                        }
+                    },
+                    "cards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CreateBoardDtoTask"
+                        }
+                    }
+                }
+            },
+            "CreateTaskDtoProject": {
+                "type": "object",
+                "properties": {
+                    "visibility": {
+                        "type": "string",
+                        "enum": ["PUBLIC", "PRIVATE"]
+                    },
+                    "workspaceId": { "type": "number" }
+                },
+                "required": ["visibility", "workspaceId"]
+            },
+            "CreateTaskDtoBoard": {
+                "type": "object",
+                "properties": {
+                    "project": {
+                        "$ref": "#/components/schemas/CreateTaskDtoProject"
+                    },
+                    "tenantId": { "type": "number" },
+                    "id": { "type": "number" }
+                },
+                "required": ["project", "tenantId", "id"]
+            },
+            "CreateTaskDto": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "statusId": { "type": "number" },
+                    "board": {
+                        "$ref": "#/components/schemas/CreateTaskDtoBoard"
+                    }
+                },
+                "required": ["title", "description", "statusId", "board"]
+            },
+            "AssigneeDto": {
+                "type": "object",
+                "properties": { "id": { "type": "number" } },
+                "required": ["id"]
+            },
+            "UpdateTaskDto": {
+                "type": "object",
+                "properties": {
+                    "title": { "type": "string" },
+                    "description": { "type": "string" },
+                    "statusId": { "type": "number" },
+                    "positionByStatus": { "type": "number" },
+                    "dueDate": { "format": "date-time", "type": "string" },
+                    "assignees": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/AssigneeDto" }
+                    }
+                }
+            },
+            "CreateTestDto": { "type": "object", "properties": {} },
+            "UpdateTestDto": { "type": "object", "properties": {} }
+        }
+    }
+}

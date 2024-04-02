@@ -1,0 +1,31 @@
+FROM python:3.6-stretch
+
+WORKDIR /app
+
+COPY Pipfile ./Pipfile
+
+COPY Pipfile.lock ./Pipfile.lock
+
+RUN pip install pipenv
+
+# IMPORTANT: update if this dependency changes in Pipfile
+RUN pip install spacy~=2.3.2
+
+RUN python -m spacy download en_core_web_sm
+
+RUN python -m spacy download de_core_news_sm
+
+RUN python -m spacy download fr_core_news_sm
+
+# IMPORTANT: update if this dependency changes in Pipfile
+RUN pip install nltk~=3.5
+
+RUN python -m nltk.downloader all
+
+RUN pipenv lock -r > req.txt
+
+RUN pip install -r req.txt
+
+COPY . /app
+
+CMD [ "python", "./main.py" ]
